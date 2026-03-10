@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 interface ButtonProps {
   children: React.ReactNode
   variant?: 'primary' | 'secondary'
@@ -12,10 +14,18 @@ export default function Button({ children, variant = 'primary', href }: ButtonPr
       : `${base} border border-surface text-text-secondary hover:text-text-primary hover:border-text-muted`
 
   if (href) {
+    const isExternal = href.startsWith('http')
+    if (isExternal) {
+      return (
+        <a href={href} target="_blank" rel="noopener noreferrer" className={styles}>
+          {children}
+        </a>
+      )
+    }
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={styles}>
+      <Link to={href} className={styles}>
         {children}
-      </a>
+      </Link>
     )
   }
 
