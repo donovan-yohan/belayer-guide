@@ -45,7 +45,7 @@ export default function Section({
   return (
     <section
       ref={ref}
-      className={`relative min-h-screen flex flex-col justify-center px-8 md:px-20 lg:px-24 py-24 ${bgStyles[bg]} ${alignmentClasses[align]} ${className}`}
+      className={`relative min-h-screen flex flex-col justify-center px-6 sm:px-8 md:px-16 lg:px-24 py-24 pb-28 ${bgStyles[bg]} ${alignmentClasses[align]} ${className}`}
       style={bgGradients[bg] || undefined}
     >
       {/* Background number */}
@@ -59,7 +59,7 @@ export default function Section({
       )}
 
       <motion.div
-        className="max-w-[700px] relative z-10"
+        className="max-w-[700px] w-full relative z-10"
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.4, ease: 'easeOut' }}

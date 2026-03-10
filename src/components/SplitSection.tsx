@@ -60,7 +60,7 @@ export default function SplitSection({
   return (
     <section
       ref={ref}
-      className={`relative min-h-screen flex flex-col justify-center px-8 md:px-20 lg:px-24 py-24 ${bgStyles[bg]}`}
+      className={`relative min-h-screen flex flex-col justify-center px-6 sm:px-8 md:px-16 lg:px-24 py-24 ${bgStyles[bg]}`}
       style={bgGradients[bg] || undefined}
     >
       {sectionNumber !== undefined && (

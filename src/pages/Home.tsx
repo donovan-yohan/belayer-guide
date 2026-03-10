@@ -8,10 +8,10 @@ export default function Home() {
       {/* 1. Hero */}
       <Section bg="base" align="center" sectionNumber={1}>
         <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Belayer</span>
-        <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.05] mb-6">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] mb-6">
           Your <strong className="text-accent">safety system</strong> for AI development
         </h1>
-        <p className="text-text-secondary text-lg mb-8 max-w-xl mx-auto">
+        <p className="text-text-secondary text-base sm:text-lg mb-8 max-w-xl mx-auto">
           A meta-framework that brings structure, review, and orchestration to Claude Code — so you can climb higher with confidence.
         </p>
         <div className="flex gap-4 justify-center flex-wrap">
@@ -24,7 +24,7 @@ export default function Home() {
       {/* 2. Harness */}
       <Section bg="elevated" align="left" sectionNumber={2}>
         <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Harness</span>
-        <h2 className="text-4xl md:text-5xl font-extrabold leading-[1.1] mb-4">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1] mb-4">
           The <strong className="text-accent">Core</strong>
         </h2>
         <p className="text-text-secondary text-lg">
@@ -36,7 +36,7 @@ export default function Home() {
       {/* 3. Plan */}
       <Section bg="warm" align="right" sectionNumber={3}>
         <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Plan</span>
-        <h2 className="text-4xl md:text-5xl font-extrabold leading-[1.1] mb-4">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1] mb-4">
           Chart the <strong className="text-accent">route</strong>
         </h2>
         <p className="text-text-secondary text-lg">
@@ -48,7 +48,7 @@ export default function Home() {
       {/* 4. Implement */}
       <Section bg="deep" align="left" sectionNumber={4}>
         <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Implement</span>
-        <h2 className="text-4xl md:text-5xl font-extrabold leading-[1.1] mb-4">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1] mb-4">
           Make the <strong className="text-accent">climb</strong>
         </h2>
         <p className="text-text-secondary text-lg">
@@ -60,7 +60,7 @@ export default function Home() {
       {/* 5. Reflect */}
       <Section bg="elevated" align="right" sectionNumber={5}>
         <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Reflect</span>
-        <h2 className="text-4xl md:text-5xl font-extrabold leading-[1.1] mb-4">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1] mb-4">
           Check your <strong className="text-accent">anchors</strong>
         </h2>
         <p className="text-text-secondary text-lg">
@@ -72,7 +72,7 @@ export default function Home() {
       {/* 6. Spotter */}
       <Section bg="warm" align="left" sectionNumber={6}>
         <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Spotter</span>
-        <h2 className="text-4xl md:text-5xl font-extrabold leading-[1.1] mb-4">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1] mb-4">
           Code <strong className="text-accent">Review</strong>
         </h2>
         <p className="text-text-secondary text-lg">
@@ -84,7 +84,7 @@ export default function Home() {
       {/* 7. Setter */}
       <Section bg="deep" align="right" sectionNumber={7}>
         <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Setter</span>
-        <h2 className="text-4xl md:text-5xl font-extrabold leading-[1.1] mb-4">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1] mb-4">
           <strong className="text-accent">Orchestration</strong>
         </h2>
         <p className="text-text-secondary text-lg">
@@ -102,7 +102,7 @@ export default function Home() {
           }}
         />
         <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Belayer</span>
-        <h2 className="text-5xl md:text-6xl font-extrabold leading-[1.1] mb-6">
+        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6">
           The complete <strong className="text-accent">safety system</strong>
         </h2>
         <p className="text-text-secondary text-lg mb-8 max-w-xl mx-auto">

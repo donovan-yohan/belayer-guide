@@ -10,10 +10,10 @@ export default function Philosophy() {
       {/* 1. Hero */}
       <Section bg="base" align="center" sectionNumber={1}>
         <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The Meta Framework</span>
-        <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.05] mb-6">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] mb-6">
           Built from the <strong className="text-accent">bottom up</strong>
         </h1>
-        <p className="text-text-secondary text-lg max-w-xl mx-auto">
+        <p className="text-text-secondary text-base sm:text-lg max-w-xl mx-auto">
           Belayer wasn't designed top-down. Each piece emerged from solving the smallest problem first, then composing solutions into something greater.
         </p>
         <PeekHint label="Opening a PR" />
@@ -27,7 +27,7 @@ export default function Philosophy() {
         headline={
           <>
             <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The First Pain Point</span>
-            <h2 className="text-4xl md:text-5xl font-extrabold leading-[1.1]">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
               Opening a <strong className="text-accent">PR</strong>
             </h2>
           </>
@@ -52,7 +52,7 @@ export default function Philosophy() {
         headline={
           <>
             <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The Spotter</span>
-            <h2 className="text-4xl md:text-5xl font-extrabold leading-[1.1]">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
               Reviewing <strong className="text-accent">Code</strong>
             </h2>
           </>
@@ -77,7 +77,7 @@ export default function Philosophy() {
         headline={
           <>
             <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The Framework</span>
-            <h2 className="text-4xl md:text-5xl font-extrabold leading-[1.1]">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
               The <strong className="text-accent">Harness</strong>
             </h2>
           </>
@@ -102,7 +102,7 @@ export default function Philosophy() {
         headline={
           <>
             <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Orchestration</span>
-            <h2 className="text-4xl md:text-5xl font-extrabold leading-[1.1]">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
               The <strong className="text-accent">Setter</strong>
             </h2>
           </>
@@ -128,7 +128,7 @@ export default function Philosophy() {
           }}
         />
         <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The Glue</span>
-        <h2 className="text-5xl md:text-6xl font-extrabold leading-[1.1] mb-6">
+        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6">
           Belayer is the <strong className="text-accent">Glue</strong>
         </h2>
         <p className="text-text-secondary text-lg mb-8 max-w-xl mx-auto">
@@ -152,7 +152,7 @@ export default function Philosophy() {
         headline={
           <>
             <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The Principle</span>
-            <h2 className="text-4xl md:text-5xl font-extrabold leading-[1.1]">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
               Solve the <strong className="text-accent">smallest</strong> problem first
             </h2>
           </>
