@@ -26,12 +26,6 @@
   --gradient-summit: linear-gradient(180deg, #1c1917, #231d18, #2a2118);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;

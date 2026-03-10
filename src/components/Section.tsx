@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 
 type BgVariant = 'base' | 'elevated' | 'warm' | 'deep' | 'summit'
 type Alignment = 'left' | 'right' | 'center'
@@ -10,6 +10,7 @@ interface SectionProps {
   align?: Alignment
   sectionNumber?: number
   className?: string
+  peekHint?: React.ReactNode
 }
 
 const bgStyles: Record<BgVariant, string> = {
@@ -38,34 +39,45 @@ export default function Section({
   align = 'left',
   sectionNumber,
   className = '',
+  peekHint,
 }: SectionProps) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.3 })
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  })
+  const numberY = useTransform(scrollYProgress, [0, 1], [60, -60])
 
   return (
     <section
       ref={ref}
-      className={`relative min-h-screen flex flex-col justify-center px-6 sm:px-8 md:px-16 lg:px-24 py-24 pb-28 ${bgStyles[bg]} ${alignmentClasses[align]} ${className}`}
+      className={`relative min-h-screen flex flex-col justify-center px-6 sm:px-8 md:px-16 lg:px-24 py-24 pb-28 overflow-hidden ${bgStyles[bg]} ${alignmentClasses[align]} ${className}`}
       style={bgGradients[bg] || undefined}
     >
-      {/* Background number */}
+      {/* Background number with parallax */}
       {sectionNumber !== undefined && (
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[180px] md:text-[200px] font-black text-white/[0.03] select-none pointer-events-none"
+        <motion.div
+          className={`absolute top-16 text-[180px] md:text-[200px] font-black text-white/[0.03] select-none pointer-events-none leading-none ${
+            align === 'right' ? 'left-6 sm:left-8 md:left-16 lg:left-24' : 'right-6 sm:right-8 md:right-16 lg:right-24'
+          }`}
+          style={{ y: numberY }}
           aria-hidden
         >
           {String(sectionNumber).padStart(2, '0')}
-        </div>
+        </motion.div>
       )}
 
       <motion.div
-        className="max-w-[700px] w-full relative z-10"
+        className={`w-full relative z-10 ${align === 'center' ? '' : 'max-w-[700px]'}`}
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.4, ease: 'easeOut' }}
       >
         {children}
       </motion.div>
+
+      {peekHint}
     </section>
   )
 }

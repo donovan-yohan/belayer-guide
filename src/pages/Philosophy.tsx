@@ -8,7 +8,7 @@ export default function Philosophy() {
   return (
     <>
       {/* 1. Hero */}
-      <Section bg="base" align="center" sectionNumber={1}>
+      <Section bg="base" align="center" peekHint={<PeekHint label="Opening a PR" />}>
         <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The Meta Framework</span>
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] mb-6">
           Built from the <strong className="text-accent">bottom up</strong>
@@ -16,14 +16,13 @@ export default function Philosophy() {
         <p className="text-text-secondary text-base sm:text-lg max-w-xl mx-auto">
           Belayer wasn't designed top-down. Each piece emerged from solving the smallest problem first, then composing solutions into something greater.
         </p>
-        <PeekHint label="Opening a PR" />
       </Section>
 
       {/* 2. Opening a PR */}
       <SplitSection
         bg="elevated"
         headlineSide="left"
-        sectionNumber={2}
+        sectionNumber={1}
         headline={
           <>
             <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The First Pain Point</span>
@@ -48,7 +47,7 @@ export default function Philosophy() {
       <SplitSection
         bg="warm"
         headlineSide="right"
-        sectionNumber={3}
+        sectionNumber={2}
         headline={
           <>
             <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The Spotter</span>
@@ -73,7 +72,7 @@ export default function Philosophy() {
       <SplitSection
         bg="deep"
         headlineSide="left"
-        sectionNumber={4}
+        sectionNumber={3}
         headline={
           <>
             <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The Framework</span>
@@ -98,7 +97,7 @@ export default function Philosophy() {
       <SplitSection
         bg="elevated"
         headlineSide="right"
-        sectionNumber={5}
+        sectionNumber={4}
         headline={
           <>
             <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Orchestration</span>
@@ -120,7 +119,7 @@ export default function Philosophy() {
       />
 
       {/* 6. Belayer is the Glue */}
-      <Section bg="summit" align="center" sectionNumber={6} className="relative">
+      <Section bg="summit" align="center" sectionNumber={5} className="relative">
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -148,7 +147,7 @@ export default function Philosophy() {
       <SplitSection
         bg="base"
         headlineSide="left"
-        sectionNumber={7}
+        sectionNumber={6}
         headline={
           <>
             <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The Principle</span>

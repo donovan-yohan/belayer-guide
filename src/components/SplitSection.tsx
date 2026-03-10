@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 
 type BgVariant = 'base' | 'elevated' | 'warm' | 'deep' | 'summit'
 
@@ -9,6 +9,7 @@ interface SplitSectionProps {
   headlineSide?: 'left' | 'right'
   bg?: BgVariant
   sectionNumber?: number
+  peekHint?: React.ReactNode
 }
 
 const bgStyles: Record<BgVariant, string> = {
@@ -31,9 +32,15 @@ export default function SplitSection({
   headlineSide = 'left',
   bg = 'base',
   sectionNumber,
+  peekHint,
 }: SplitSectionProps) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.3 })
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  })
+  const numberY = useTransform(scrollYProgress, [0, 1], [60, -60])
 
   const headlineBlock = (
     <motion.div
@@ -60,22 +67,27 @@ export default function SplitSection({
   return (
     <section
       ref={ref}
-      className={`relative min-h-screen flex flex-col justify-center px-6 sm:px-8 md:px-16 lg:px-24 py-24 ${bgStyles[bg]}`}
+      className={`relative min-h-screen flex flex-col justify-center px-6 sm:px-8 md:px-16 lg:px-24 py-24 overflow-hidden ${bgStyles[bg]}`}
       style={bgGradients[bg] || undefined}
     >
       {sectionNumber !== undefined && (
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[180px] md:text-[200px] font-black text-white/[0.03] select-none pointer-events-none"
+        <motion.div
+          className={`absolute top-16 text-[180px] md:text-[200px] font-black text-white/[0.03] select-none pointer-events-none leading-none ${
+            headlineSide === 'left' ? 'right-6 sm:right-8 md:right-16 lg:right-24' : 'left-6 sm:left-8 md:left-16 lg:left-24'
+          }`}
+          style={{ y: numberY }}
           aria-hidden
         >
           {String(sectionNumber).padStart(2, '0')}
-        </div>
+        </motion.div>
       )}
 
-      <div className={`relative z-10 flex flex-col md:flex-row gap-12 md:gap-20 items-start ${headlineSide === 'right' ? 'md:flex-row-reverse' : ''}`}>
+      <div className={`relative z-10 flex flex-col md:flex-row gap-12 md:gap-20 items-center ${headlineSide === 'right' ? 'md:flex-row-reverse' : ''}`}>
         {headlineBlock}
         {contentBlock}
       </div>
+
+      {peekHint}
     </section>
   )
 }

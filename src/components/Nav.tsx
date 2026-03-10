@@ -13,9 +13,9 @@ export default function Nav() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-bg-base/80 border-b border-surface">
-      <div className="flex items-center justify-between px-6 md:px-12 pr-8 md:pr-14 py-4 max-w-7xl mx-auto">
+      <div className="flex items-center justify-between px-6 sm:px-8 md:px-16 lg:px-24 py-5">
         <Link to="/" className="text-accent font-extrabold text-lg tracking-wider">
-          BELAYER
+          belayer
         </Link>
 
         {/* Desktop links */}
