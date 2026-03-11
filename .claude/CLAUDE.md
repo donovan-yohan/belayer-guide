@@ -1,48 +1,48 @@
-# Belayer Lead
+# Belayer Guide
 
-You are operating as an autonomous lead agent managed by belayer.
+Marketing/informational website for the Belayer climbing guide product. Built with Vite, React 19, TypeScript, Tailwind CSS v4, and Framer Motion. Deployed on Vercel.
 
-## Your Assignment
+## Quick Reference
 
-Read `.lead/GOAL.json` for your full assignment context including task spec, goal description, and any feedback from previous attempts.
+| Action | Command |
+|--------|---------|
+| Dev | `npm run dev` |
+| Build | `npm run build` |
+| Lint | `npm run lint` |
+| Preview | `npm run preview` |
 
-## Autonomous Operation
+## Documentation Map
 
-You MUST operate fully autonomously:
-- NEVER ask questions or wait for user input
-- NEVER request clarification — make your best judgment and proceed
-- If you encounter ambiguity, document your decision and move forward
-- Use available skills, MCP tools, and harness commands as needed
+| Category | Path | When to look here |
+|----------|------|-------------------|
+| Architecture | `docs/ARCHITECTURE.md` | Understanding module boundaries, component structure, where code lives |
+| Design | `docs/DESIGN.md` | Design philosophy, key decisions, pattern rationale |
+| Frontend | `docs/FRONTEND.md` | Component patterns, styling conventions, animation approach |
+| Plans | `docs/PLANS.md` | Active work, completed plans, tech debt tracking |
+| Bug Analyses | `docs/bug-analyses/` | Investigating bugs, understanding past root causes |
+| Refactor Scopes | `docs/refactor-scopes/` | Planning refactoring, reviewing past extraction patterns |
+| References | `docs/references/` | External library docs, API specs, llms.txt files |
+
+## Key Patterns
+
+- All components are functional React + TypeScript — no class components
+- Tailwind CSS v4 utility classes only — no CSS modules or styled-components
+- Framer Motion for all animations — no CSS keyframes or transition libraries
+- Components are presentational and props-driven — no global state management
+- Section/SplitSection are the primary content containers for page layout
+- React Router DOM v7 with BrowserRouter — Vercel rewrites handle SPA fallback
 
 ## Workflow
 
-1. Read `.lead/GOAL.json` to understand your assignment
-2. Use `/harness:plan` to create an implementation plan for your goal
-3. Use `/harness:orchestrate` to execute with agent teams if beneficial
-4. Implement, test, commit, and push your changes
-5. Use `/harness:reflect` to update documentation
-6. Write `DONE.json` when complete (see format below)
+> brainstorm → plan → orchestrate → review → reflect → complete
 
-## DONE.json Contract
-
-When finished, write `DONE.json` in the working directory:
-
-```json
-{
-  "status": "complete",
-  "summary": "Brief description of what was done",
-  "files_changed": ["list", "of", "files"],
-  "notes": "Any context for reviewers"
-}
-```
-
-If you cannot complete the goal, write DONE.json with `"status": "failed"` and explain what blocked you.
-
-IMPORTANT: You MUST commit, push, and write DONE.json before your session ends.
-
-## Mail
-
-You can receive messages from the orchestration system.
-When prompted, run `belayer mail read` to check your messages.
-When you complete your work, signal completion:
-  belayer message setter --type done --body '{"status":"complete","summary":"<describe what you did>"}'
+| Step | Command | Purpose |
+|------|---------|---------|
+| 1a | `/harness:brainstorm` | Design through collaborative dialogue |
+| 1b | `/harness:bug` | Investigate and diagnose a bug |
+| 1c | `/harness:refactor` | Scope incremental refactoring |
+| 2 | `/harness:plan` | Create living implementation plan |
+| 3 | `/harness:orchestrate` | Execute with agent teams + micro-reflects |
+| 4 | `/harness:review` | Code simplification + multi-perspective review |
+| 5 | `/harness:reflect` | Full reflection, conversation mining, retrospective |
+| 6 | `/harness:complete` | Archive plan, prune check, and create PR |
