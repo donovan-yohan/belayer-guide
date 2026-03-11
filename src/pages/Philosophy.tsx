@@ -150,16 +150,18 @@ export default function Philosophy() {
         <p className="text-text-secondary text-lg mb-8 max-w-xl mx-auto">
           Bad specification produces 10,000+ lines of wrong code. Bad research, 1,000+. Bad planning, 10–100. Human attention belongs at the highest-leverage points — not reviewing output, but validating direction.
         </p>
-        <Carousel className="max-w-xl mx-auto">
-          <div className="flex flex-col items-center gap-3">
-            <ImpactPyramid />
-            <p className="text-text-muted text-sm">Impact Pyramid — errors multiply as they flow down</p>
-          </div>
-          <div className="flex flex-col items-center gap-3">
-            <AmplificationFlow />
-            <p className="text-text-muted text-sm">Amplification Cascade — one bad input dominates output</p>
-          </div>
-        </Carousel>
+        <div className="overflow-hidden rounded-lg max-w-xl mx-auto">
+          <Carousel>
+            <div className="flex flex-col items-center gap-3">
+              <ImpactPyramid />
+              <p className="text-text-muted text-sm">Impact Pyramid — errors multiply as they flow down</p>
+            </div>
+            <div className="flex flex-col items-center gap-3">
+              <AmplificationFlow />
+              <p className="text-text-muted text-sm">Amplification Cascade — one bad input dominates output</p>
+            </div>
+          </Carousel>
+        </div>
       </Section>
 
       {/* 6. Two documents, two problems */}
