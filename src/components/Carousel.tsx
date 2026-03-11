@@ -2,16 +2,19 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import type { Variants } from 'framer-motion'
 
+type Direction = 1 | -1
+
 interface CarouselProps {
-  children: React.ReactNode[]
+  children: [React.ReactNode, ...React.ReactNode[]]
   className?: string
 }
 
 export default function Carousel({ children, className }: CarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [direction, setDirection] = useState(1)
+  const [direction, setDirection] = useState<Direction>(1)
 
   const goTo = (index: number) => {
+    if (index === currentIndex) return
     setDirection(index > currentIndex ? 1 : -1)
     setCurrentIndex(index)
   }
@@ -36,6 +39,7 @@ export default function Carousel({ children, className }: CarouselProps) {
   return (
     <div className={className}>
       <motion.div
+        className="overflow-hidden"
         drag="x"
         dragConstraints={{ left: 0, right: 0 }}
         dragElastic={0.2}
@@ -47,7 +51,7 @@ export default function Carousel({ children, className }: CarouselProps) {
           }
         }}
       >
-        <AnimatePresence mode="wait" custom={direction}>
+        <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
             custom={direction}
