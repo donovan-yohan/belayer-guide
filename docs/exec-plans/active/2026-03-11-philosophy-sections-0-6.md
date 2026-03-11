@@ -1,6 +1,6 @@
 # Philosophy Page Sections 0-6 Rewrite
 
-> **Status**: Active | **Created**: 2026-03-11 | **Last Updated**: 2026-03-11
+> **Status**: Complete | **Created**: 2026-03-11 | **Last Updated**: 2026-03-11
 > **Source**: GOAL.json guide-5 climb spec
 > **For Claude:** Use /harness:orchestrate to execute this plan.
 
@@ -15,9 +15,10 @@
 
 ## Progress
 
-- [ ] Task 1: Rewrite Philosophy.tsx with 7 new sections (0-6)
-- [ ] Task 2: Build and verify no TypeScript errors
-- [ ] Task 3: Commit changes
+- [x] Task 1: Rewrite Philosophy.tsx with 7 new sections (0-6)
+- [x] Task 2: Build and verify no TypeScript errors
+- [x] Task 3: Commit changes
+- [x] Task 4: Code review — fixed Carousel overflow clipping
 
 ## Surprises & Discoveries
 
@@ -60,10 +61,11 @@ _None yet._
 _Filled by /harness:complete when work is done._
 
 **What worked:**
--
+- All 13 diagram components were already built by guide-1/guide-2/guide-3, making wiring straightforward
+- Carousel + overflow-hidden wrapper pattern works well for multi-diagram sections
 
 **What didn't:**
--
+- TwoDocuments uses a different wrapper/sizing pattern (DiagramWrapper 280px) vs other diagrams (520px) — visual inconsistency noted but out of scope
 
 **Learnings to codify:**
--
+- When placing diagrams inside Carousel, wrap in overflow-hidden to prevent Section's overflow from clipping drag gestures
