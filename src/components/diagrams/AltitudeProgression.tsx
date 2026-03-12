@@ -3,20 +3,20 @@ import { draw, fade, DiagramWrapper } from './variants'
 
 export default function AltitudeProgression() {
   const platforms = [
-    { y: 165, label: 'PR Plugin', custom: 0 },
-    { y: 110, label: 'Harness', custom: 1 },
-    { y: 55, label: 'Belayer', custom: 2 },
+    { y: 155, label: 'PR Plugin', custom: 0 },
+    { y: 100, label: 'Harness', custom: 1 },
+    { y: 45, label: 'Belayer', custom: 2 },
   ]
 
   const pathDots = [
-    { x: 90, y: 150 },
-    { x: 100, y: 135 },
-    { x: 115, y: 125 },
-    { x: 105, y: 115 },
-    { x: 95, y: 95 },
-    { x: 105, y: 80 },
-    { x: 115, y: 70 },
-    { x: 100, y: 60 },
+    { x: 90, y: 140 },
+    { x: 100, y: 125 },
+    { x: 115, y: 115 },
+    { x: 105, y: 105 },
+    { x: 95, y: 85 },
+    { x: 105, y: 70 },
+    { x: 115, y: 60 },
+    { x: 100, y: 50 },
   ]
 
   return (
@@ -24,7 +24,7 @@ export default function AltitudeProgression() {
       <svg viewBox="0 0 200 200" className="w-full h-full">
         {/* Winding rope/path connecting levels bottom to top */}
         <motion.path
-          d="M 100 170 Q 85 155 90 140 Q 100 125 115 118 Q 120 113 105 105 Q 90 97 95 82 Q 103 68 115 62 Q 118 58 100 52"
+          d="M 100 160 Q 85 145 90 130 Q 100 115 115 108 Q 120 103 105 95 Q 90 87 95 72 Q 103 58 115 52 Q 118 48 100 42"
           fill="none"
           stroke="#f59e0b"
           strokeWidth="1.5"

@@ -1,14 +1,5 @@
 import { motion } from 'framer-motion'
 
-const draw = {
-  hidden: { pathLength: 0, opacity: 0 },
-  visible: (i: number) => ({
-    pathLength: 1,
-    opacity: 1,
-    transition: { pathLength: { duration: 0.8, delay: i * 0.15 }, opacity: { duration: 0.2, delay: i * 0.15 } },
-  }),
-}
-
 const fade = {
   hidden: { opacity: 0, y: 10 },
   visible: (i: number) => ({
@@ -19,17 +10,18 @@ const fade = {
 }
 
 /**
- * 5-layer pyramid showing how errors at higher levels of abstraction
+ * 5-layer inverted pyramid showing how errors at higher levels of abstraction
  * compound into exponentially more damage downstream.
  *
- * Top = Specification (highest leverage, smallest surface)
- * Bottom = Code Output (lowest leverage, largest surface)
+ * Top = Code (lowest leverage, narrowest)
+ * Bottom = Specification (highest leverage, widest)
  *
- * Each layer shows an error multiplier and gets progressively wider + dimmer.
+ * Each layer shows an error multiplier and gets progressively wider + brighter.
  */
 
 interface Layer {
   label: string
+  subtitle: string | null
   multiplier: string
   y: number
   leftX: number
@@ -38,42 +30,41 @@ interface Layer {
   strokeOpacity: number
 }
 
-const layers: Layer[] = [
-  { label: 'Specification', multiplier: '10,000×', y: 38, leftX: 168, rightX: 232, fillOpacity: 0.35, strokeOpacity: 0.7 },
-  { label: 'Research', multiplier: '1,000×', y: 88, leftX: 138, rightX: 262, fillOpacity: 0.25, strokeOpacity: 0.5 },
-  { label: 'Planning', multiplier: '100×', y: 138, leftX: 108, rightX: 292, fillOpacity: 0.18, strokeOpacity: 0.35 },
-  { label: 'Implementation', multiplier: '10×', y: 188, leftX: 78, rightX: 322, fillOpacity: 0.12, strokeOpacity: 0.25 },
-  { label: 'Code Output', multiplier: '1×', y: 238, leftX: 48, rightX: 352, fillOpacity: 0.07, strokeOpacity: 0.15 },
-]
+// viewBox: 0 0 500 310
+// Centre = 250. Layers top-to-bottom, narrow to wide (inverted pyramid).
+// Each layer trapezoid: top edge narrower, bottom edge wider.
+// Layer height ~44px. Badge at rightX + 6; widest badge ("10,000×") is ~8 chars
+// × ~6px ≈ 48px, so rightX must be ≤ 446 to stay inside 500-wide viewBox.
 
-const layerHeight = 42
+const layerHeight = 44
+
+const layers: Layer[] = [
+  { label: 'Code',           subtitle: '"1 bad line = 1 bad line"',    multiplier: '1×',      y: 20,  leftX: 210, rightX: 290, fillOpacity: 0.07, strokeOpacity: 0.15 },
+  { label: 'Implementation', subtitle: null,                            multiplier: '10×',     y: 66,  leftX: 180, rightX: 320, fillOpacity: 0.12, strokeOpacity: 0.25 },
+  { label: 'Planning',       subtitle: '"Wrong Solution"',              multiplier: '10–100×', y: 112, leftX: 140, rightX: 360, fillOpacity: 0.18, strokeOpacity: 0.35 },
+  { label: 'Research',       subtitle: '"Misunderstanding the System"', multiplier: '1,000×',  y: 158, leftX: 90,  rightX: 410, fillOpacity: 0.25, strokeOpacity: 0.50 },
+  { label: 'Specification',  subtitle: '"Wrong Problem"',               multiplier: '10,000×', y: 204, leftX: 34,  rightX: 446, fillOpacity: 0.35, strokeOpacity: 0.70 },
+]
 
 export default function ImpactPyramid() {
   return (
     <motion.div
-      className="w-full max-w-[520px] mx-auto"
+      className="w-full max-w-[560px] mx-auto"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
     >
-      <svg viewBox="0 0 400 290" className="w-full h-auto">
-        {/* Outer pyramid outline */}
-        <motion.path
-          d="M 200 20 L 40 270 L 360 270 Z"
-          fill="none"
-          stroke="#f59e0b"
-          strokeWidth="1"
-          strokeOpacity="0.08"
-          variants={draw}
-          custom={0}
-        />
+      <svg viewBox="0 0 500 310" className="w-full h-auto">
 
-        {/* Layers from top to bottom */}
+        {/* Layers from top (narrow) to bottom (wide) */}
         {layers.map((layer, i) => {
           const nextLayer = layers[i + 1]
-          const bottomY = nextLayer ? nextLayer.y : layer.y + layerHeight + 10
+          // Bottom edge of this trapezoid = top edge of next layer (or extrapolated)
+          const bottomY = nextLayer ? nextLayer.y : layer.y + layerHeight
           const bottomLeftX = nextLayer ? nextLayer.leftX : layer.leftX - 30
           const bottomRightX = nextLayer ? nextLayer.rightX : layer.rightX + 30
+
+          const midY = layer.y + (bottomY - layer.y) / 2
 
           return (
             <g key={layer.label}>
@@ -91,8 +82,8 @@ export default function ImpactPyramid() {
 
               {/* Layer label */}
               <motion.text
-                x="200"
-                y={layer.y + (bottomY - layer.y) / 2 + 5}
+                x="250"
+                y={layer.subtitle ? midY - 3 : midY + 5}
                 textAnchor="middle"
                 fill="#fafaf9"
                 fontSize="12"
@@ -103,13 +94,30 @@ export default function ImpactPyramid() {
                 {layer.label}
               </motion.text>
 
-              {/* Error multiplier badge */}
+              {/* Subtitle / failure mode */}
+              {layer.subtitle && (
+                <motion.text
+                  x="250"
+                  y={midY + 11}
+                  textAnchor="middle"
+                  fill="#d6d3d1"
+                  fontSize="9"
+                  fontWeight="400"
+                  fontStyle="italic"
+                  variants={fade}
+                  custom={i + 1.4}
+                >
+                  {layer.subtitle}
+                </motion.text>
+              )}
+
+              {/* Error multiplier badge — right side */}
               <motion.text
-                x={layer.rightX + 16}
-                y={layer.y + (bottomY - layer.y) / 2 + 4}
+                x={layer.rightX + 6}
+                y={midY + 5}
                 textAnchor="start"
                 fill="#f59e0b"
-                fontSize="11"
+                fontSize="10"
                 fontWeight="700"
                 fontFamily="monospace"
                 variants={fade}
@@ -121,17 +129,18 @@ export default function ImpactPyramid() {
           )
         })}
 
-        {/* "Human attention" arrow pointing at top */}
+        {/* "HIGHEST LEVERAGE" arrow pointing DOWN at the bottom (widest) layer */}
+        {/* Arrow tip points at bottom layer */}
         <motion.path
-          d="M 200 8 L 196 16 L 204 16 Z"
+          d="M 250 296 L 246 288 L 254 288 Z"
           fill="#f59e0b"
           fillOpacity="0.6"
           variants={fade}
           custom={7}
         />
         <motion.text
-          x="200"
-          y="5"
+          x="250"
+          y="307"
           textAnchor="middle"
           fill="#f59e0b"
           fontSize="8"
