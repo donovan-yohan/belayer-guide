@@ -3,7 +3,6 @@ import SplitSection from '../components/SplitSection'
 import PeekHint from '../components/PeekHint'
 import SkillTag from '../components/SkillTag'
 import Button from '../components/Button'
-import Carousel from '../components/Carousel'
 import ThreeHats from '../components/diagrams/ThreeHats'
 import BoundaryDiagram from '../components/diagrams/BoundaryDiagram'
 import BuildingBlocks from '../components/diagrams/BuildingBlocks'
@@ -27,7 +26,7 @@ export default function Philosophy() {
           Three hats, one <strong className="text-accent">engineer</strong>
         </h1>
         <p className="text-text-secondary text-base sm:text-lg max-w-xl mx-auto mb-8">
-          Every engineer wears three hats in the software development lifecycle: refinement and planning, implementation, and code review. Agentic engineering breaks down workflow the same way we break down any system — by finding the boundaries.
+          Every engineer wears three hats in the software development lifecycle: refinement and planning, implementation, and code review. Agentic engineering breaks down workflow the same way we break down any system: by finding the boundaries.
         </p>
         <ThreeHats />
       </Section>
@@ -49,10 +48,10 @@ export default function Philosophy() {
           <div className="space-y-6">
             <div className="text-text-secondary text-lg space-y-4">
               <p>
-                If a tool that refines is also the tool that implements, context explodes. The agent tries to hold everything at once — the problem definition, the architecture, the code, the tests — and quality drops everywhere.
+                If a tool that refines is also the tool that implements, context explodes. The agent tries to hold everything at once: the problem definition, the architecture, the code, the tests. Quality drops everywhere.
               </p>
               <p>
-                Crossing a boundary <em>is</em> its own tool. Something great at planning + something great at implementing + something that gets them talking = a system.
+                Crossing a boundary <em>is</em> its own tool. Something great at planning, something great at implementing, and something that gets them talking. That's a system.
               </p>
             </div>
             <BoundaryDiagram />
@@ -76,7 +75,7 @@ export default function Philosophy() {
         content={
           <div className="text-text-secondary text-lg space-y-4">
             <p>
-              The first problem we solved was tedious: writing good pull requests. It pulled you out of your code to restate work you'd already done. We built <SkillTag>pr:author</SkillTag> — clear start (implementation done), clear end (PR link).
+              The first problem we solved was tedious: writing good pull requests. It pulled you out of your code to restate work you'd already done. We built <SkillTag>pr:author</SkillTag>. Clear start (implementation done), clear end (PR link).
             </p>
             <p>
               Small scope made it obvious when it was working and when it wasn't. That's the first insight: <strong className="text-text-primary">start with a problem small enough to verify.</strong>
@@ -105,7 +104,7 @@ export default function Philosophy() {
                 If an agent can write PRs, it can review them too. <SkillTag>pr:review</SkillTag> catches issues against project conventions. <SkillTag>pr:resolve</SkillTag> addresses review feedback automatically.
               </p>
               <p>
-                Each tool solves a specific, testable problem within the same pillar. Stack them and something greater emerges.
+                Each tool solves one problem well. But what happens when you connect them?
               </p>
             </div>
             <BuildingBlocks />
@@ -113,16 +112,16 @@ export default function Philosophy() {
         }
       />
 
-      {/* 4. Tested tools, focused problems */}
+      {/* 4. The First Loop */}
       <SplitSection
         bg="elevated"
         headlineSide="right"
         sectionNumber={4}
         headline={
           <>
-            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The Orchestration Insight</span>
+            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The First Loop</span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
-              Tested tools, <strong className="text-accent">focused</strong> problems
+              Small tools, first <strong className="text-accent">cycle</strong>
             </h2>
           </>
         }
@@ -130,10 +129,10 @@ export default function Philosophy() {
           <div className="space-y-6">
             <div className="text-text-secondary text-lg space-y-4">
               <p>
-                With tested building blocks, you stop worrying about correctness and start thinking about sequencing. A failure of outcome becomes a failure of <em>orchestration</em>, not tools.
+                The PR cycle is the first composed workflow. Author writes the PR, review catches issues, resolve addresses them, review checks again. The loop runs until the PR is clean.
               </p>
               <p>
-                A self-healing cycle emerges: author a PR, review it, resolve feedback, review again. The loop runs until the PR is clean — no human in the middle.
+                When something goes wrong now, it's not a tool problem. It's a sequencing problem. That shift matters: with tested building blocks, you stop worrying about correctness and start thinking about orchestration.
               </p>
             </div>
             <CycleDiagram />
@@ -154,19 +153,17 @@ export default function Philosophy() {
           Errors compound <strong className="text-accent">upstream</strong>
         </h2>
         <p className="text-text-secondary text-lg mb-8 max-w-xl mx-auto">
-          Bad specification produces 10,000+ lines of wrong code. Bad research, 1,000+. Bad planning, 10–100. Human attention belongs at the highest-leverage points — not reviewing output, but validating direction.
+          A bad line of code is a bad line of code. But a bad line of plan could lead to hundreds of bad lines of code. A bad line of research, a misunderstanding of how the codebase works or where certain functionality lives, could land you with thousands of bad lines of code. If we can't make small tools reliable, or small loops reliable, it just amplifies at scale. Human attention belongs at the highest-leverage points: not reviewing output, but validating direction.
         </p>
-        <div className="overflow-hidden rounded-lg max-w-xl mx-auto">
-          <Carousel>
-            <div className="flex flex-col items-center gap-3">
-              <ImpactPyramid />
-              <p className="text-text-muted text-sm">Impact Pyramid — errors multiply as they flow down</p>
-            </div>
-            <div className="flex flex-col items-center gap-3">
-              <AmplificationFlow />
-              <p className="text-text-muted text-sm">Amplification Cascade — one bad input dominates output</p>
-            </div>
-          </Carousel>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+          <div className="flex flex-col items-center gap-3">
+            <ImpactPyramid />
+            <p className="text-text-muted text-sm">Impact hierarchy: errors multiply as they flow down</p>
+          </div>
+          <div className="flex flex-col items-center gap-3">
+            <AmplificationFlow />
+            <p className="text-text-muted text-sm">Amplification cascade: one bad input dominates output</p>
+          </div>
         </div>
       </Section>
 
@@ -187,7 +184,7 @@ export default function Philosophy() {
           <div className="space-y-6">
             <div className="text-text-secondary text-lg space-y-4">
               <p>
-                The design doc validates that the <em>problem</em> is correct — are we solving the right thing? The plan catches hallucinations by reading every file before modifying any.
+                If errors compound upstream, you need to catch them upstream. The design doc validates that the <em>problem</em> is correct: are we solving the right thing? The plan catches hallucinations by reading every file before modifying any.
               </p>
               <p>
                 Different tools for different problems. The design doc is exploratory and divergent. The plan is structured and convergent. Conflating them is how you get 10,000 wrong lines.
@@ -217,31 +214,131 @@ export default function Philosophy() {
               Code alone isn't enough for informed decisions. An agent reading a function doesn't know <em>why</em> that function exists, what trade-off it represents, or what the team tried before.
             </p>
             <p>
-              Agents need the same thing new engineers need: onboarding, product context, tribal knowledge. Persistent documentation captures the <strong className="text-text-primary">WHY</strong> — architecture decisions, design rationale, project goals — so every agent session starts informed, not guessing.
+              Agents need the same thing new engineers need: onboarding, product context, tribal knowledge. Persistent documentation captures the <strong className="text-text-primary">why</strong>: architecture decisions, design rationale, project goals. Every agent session starts informed instead of guessing.
             </p>
           </div>
         }
       />
 
-      {/* 8. The full loop */}
-      <Section bg="warm" align="center" sectionNumber={8}>
+      {/* 8. Brainstorm & Plan */}
+      <SplitSection
+        bg="warm"
+        headlineSide="left"
+        sectionNumber={8}
+        headline={
+          <>
+            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The First Two Steps</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
+              Brainstorm and <strong className="text-accent">plan</strong>
+            </h2>
+          </>
+        }
+        content={
+          <div className="text-text-secondary text-lg space-y-4">
+            <p>
+              Brainstorm explores the problem space. What are we building? Why? What have we tried before? The output is a design doc that captures the thinking.
+            </p>
+            <p>
+              Plan reads every file it will touch before writing a single line. The output is a structured implementation plan. Two documents, two checkpoints. The first validates the problem. The second validates the approach.
+            </p>
+          </div>
+        }
+      />
+
+      {/* 9. Orchestrate */}
+      <SplitSection
+        bg="deep"
+        headlineSide="right"
+        sectionNumber={9}
+        headline={
+          <>
+            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Execution</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
+              <strong className="text-accent">Orchestrate</strong>
+            </h2>
+          </>
+        }
+        content={
+          <div className="text-text-secondary text-lg space-y-4">
+            <p>
+              With a validated plan, agent teams execute using the same small, tested tools from earlier. Each task has a clear start, clear end, and a known-good tool to run it.
+            </p>
+            <p>
+              The plan drives the work. The tools do the work. The orchestrator sequences them.
+            </p>
+          </div>
+        }
+      />
+
+      {/* 10. Review */}
+      <SplitSection
+        bg="elevated"
+        headlineSide="left"
+        sectionNumber={10}
+        headline={
+          <>
+            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Independent Review</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
+              A fresh pair of <strong className="text-accent">eyes</strong>
+            </h2>
+          </>
+        }
+        content={
+          <div className="text-text-secondary text-lg space-y-4">
+            <p>
+              The review step uses a separate agent that reads only the output, not the plan that produced it. It's not anchored to the same assumptions the builder had.
+            </p>
+            <p>
+              A code review from a context that never saw the plan catches different things than one that did. That independence is the point.
+            </p>
+          </div>
+        }
+      />
+
+      {/* 11. Reflect */}
+      <SplitSection
+        bg="base"
+        headlineSide="right"
+        sectionNumber={11}
+        headline={
+          <>
+            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Closing the Loop</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
+              Check against the <strong className="text-accent">docs</strong>
+            </h2>
+          </>
+        }
+        content={
+          <div className="text-text-secondary text-lg space-y-4">
+            <p>
+              After review, the reflect step compares what was built against the project's persistent documentation. Did a design decision drift? Is there a new pattern that should be recorded?
+            </p>
+            <p>
+              Reflect captures learnings and updates context so the next session starts with accurate information instead of stale docs.
+            </p>
+          </div>
+        }
+      />
+
+      {/* 12. The Full Loop — the payoff */}
+      <Section bg="warm" align="center" sectionNumber={12}>
         <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The Harness Workflow</span>
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6">
           The full <strong className="text-accent">loop</strong>
         </h2>
         <p className="text-text-secondary text-lg mb-8 max-w-xl mx-auto">
-          Brainstorm the design. Plan the implementation. Orchestrate agent teams to build it. Review with a fresh pair of eyes. Reflect to capture learnings. Complete to ship. The review step is what keeps agents honest — a separate agent that reads only the output, not the plan that produced it.
+          That's the complete cycle. Brainstorm the design. Plan the implementation. Orchestrate agent teams to build it. Review with an independent context. Reflect to keep the docs honest. Each step is its own job because each step solves a different problem. The review step is what keeps agents honest. The reflect step is what keeps the knowledge alive.
         </p>
         <div className="max-w-xs mx-auto">
           <HarnessLoop />
         </div>
       </Section>
 
-      {/* 9. What if the requirement is larger? */}
+      {/* 13. What if the requirement is larger? */}
       <SplitSection
         bg="deep"
         headlineSide="left"
-        sectionNumber={9}
+        sectionNumber={13}
         headline={
           <>
             <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Scaling Up</span>
@@ -254,10 +351,10 @@ export default function Philosophy() {
           <div className="space-y-6">
             <div className="text-text-secondary text-lg space-y-4">
               <p>
-                Leads. Each lead runs a full harness loop — brainstorm, plan, orchestrate, review, reflect — planned and executed independently per goal. A setter coordinates, decomposing a specification into independent climbs.
+                Leads. Each lead runs a full harness loop: brainstorm, plan, orchestrate, review, reflect. Planned and executed independently per goal. A setter coordinates, decomposing a specification into independent climbs.
               </p>
               <p>
-                Independent goals run <strong className="text-text-primary">simultaneously</strong>. Three leads working three features isn't three times as slow — it's roughly the same wall-clock time as one, with the setter ensuring they don't collide.
+                Independent goals run <strong className="text-text-primary">simultaneously</strong>. Three leads working three features isn't three times as slow. It's roughly the same wall-clock time as one, with the setter ensuring they don't collide.
               </p>
             </div>
             <ParallelLeads />
@@ -265,8 +362,8 @@ export default function Philosophy() {
         }
       />
 
-      {/* 10. 3 projects. 2 days. */}
-      <Section bg="summit" align="center" sectionNumber={10} className="relative">
+      {/* 14. 3 projects. 2 days. */}
+      <Section bg="summit" align="center" sectionNumber={14} className="relative">
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -278,18 +375,18 @@ export default function Philosophy() {
           3 projects. 2 <strong className="text-accent">days.</strong>
         </h2>
         <p className="text-text-secondary text-lg mb-8 max-w-xl mx-auto">
-          A hackathon. Listen to the finance team, take notes, create a design doc, dispatch leads. While those run: brainstorm CLI improvements, configure a dynamic Clickhouse endpoint, prototype Claude from mobile. The human works as <strong className="text-text-primary">architect</strong> — setting direction, not writing every line.
+          A hackathon. Listen to the finance team, take notes, create a design doc, dispatch leads. While those run: brainstorm CLI improvements, configure a dynamic Clickhouse endpoint, prototype Claude from mobile. The human works as <strong className="text-text-primary">architect</strong>, setting direction instead of writing every line.
         </p>
         <div className="max-w-sm mx-auto">
           <HackathonTimeline />
         </div>
       </Section>
 
-      {/* 11. Start anywhere on the journey */}
+      {/* 15. Start anywhere on the journey */}
       <SplitSection
         bg="base"
         headlineSide="right"
-        sectionNumber={11}
+        sectionNumber={15}
         headline={
           <>
             <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Meet You Where You Are</span>
@@ -305,7 +402,7 @@ export default function Philosophy() {
                 The stack meets engineers wherever they are. Start with the <SkillTag>pr:author</SkillTag> plugin to automate your PR workflow. Grow into harness commands for structured design-plan-execute cycles. Graduate to <SkillTag>harness:loop</SkillTag> for fully autonomous runs. Scale to belayer for multi-repo orchestration.
               </p>
               <p>
-                Each layer is composed of workflows you already know work. No leap of faith required — just the next step up.
+                Each layer is composed of workflows you already know work. No leap of faith required, just the next step up.
               </p>
             </div>
             <AltitudeProgression />
@@ -313,14 +410,14 @@ export default function Philosophy() {
         }
       />
 
-      {/* 12. Workflows composed of workflows — Close */}
-      <Section bg="elevated" align="center" sectionNumber={12}>
+      {/* 16. Workflows composed of workflows — Close */}
+      <Section bg="elevated" align="center" sectionNumber={16}>
         <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The Close</span>
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6">
           Workflows composed of <strong className="text-accent">workflows</strong>
         </h2>
         <p className="text-text-secondary text-lg mb-8 max-w-xl mx-auto">
-          That's the meta-framework principle. Architecture doesn't emerge from grand upfront design — it emerges from real needs, tested at each level. When something breaks, you know exactly where to look: the tool, the orchestration, or the specification. Each layer is built from the layer below.
+          That's the meta-framework principle. Architecture doesn't come from grand upfront design. It comes from real needs, tested at each level. When something breaks, you know exactly where to look: the tool, the orchestration, or the specification. Each layer is built from the layer below.
         </p>
         <div className="max-w-sm mx-auto mb-10">
           <ComposedStack />

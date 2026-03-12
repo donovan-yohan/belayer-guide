@@ -16,7 +16,7 @@ const streamEndX = 185
 export default function HackathonTimeline() {
   return (
     <DiagramWrapper>
-      <svg viewBox="0 0 200 200" className="w-full h-full">
+      <svg viewBox="-15 0 215 200" className="w-full h-full">
         {/* Human node */}
         <motion.circle
           cx={humanX}

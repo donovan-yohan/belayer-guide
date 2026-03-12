@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion'
 import { draw, fade, DiagramWrapper } from './variants'
 
-const cx = 100
-const cy = 100
+const cx = 120
+const cy = 120
 const nodeR = 65
-const labelR = 83
+const labelR = 80
 
 const steps = ['brainstorm', 'plan', 'orchestrate', 'review', 'reflect', 'complete']
 
@@ -16,7 +16,7 @@ function pos(i: number, radius: number) {
 export default function HarnessLoop() {
   return (
     <DiagramWrapper>
-      <svg viewBox="0 0 200 200" className="w-full h-full">
+      <svg viewBox="0 0 240 240" className="w-full h-full">
         <defs>
           <marker id="feedback-arrow" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto">
             <path d="M 0 0 L 5 2.5 L 0 5 z" fill="#f59e0b" opacity="0.65" />
@@ -50,7 +50,7 @@ export default function HarnessLoop() {
           const orchestrate = pos(2, nodeR)
           return (
             <motion.path
-              d={`M ${review.x.toFixed(1)} ${review.y.toFixed(1)} Q 148 138 ${orchestrate.x.toFixed(1)} ${orchestrate.y.toFixed(1)}`}
+              d={`M ${review.x.toFixed(1)} ${review.y.toFixed(1)} Q 168 158 ${orchestrate.x.toFixed(1)} ${orchestrate.y.toFixed(1)}`}
               fill="none"
               stroke="#f59e0b"
               strokeWidth="1.5"
