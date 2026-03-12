@@ -6,7 +6,7 @@ import Button from '../components/Button'
 import ThreeHats from '../components/diagrams/ThreeHats'
 import BoundaryDiagram from '../components/diagrams/BoundaryDiagram'
 import BuildingBlocks from '../components/diagrams/BuildingBlocks'
-import CycleDiagram from '../components/diagrams/CycleDiagram'
+import PRCycleDiagram from '../components/diagrams/PRCycleDiagram'
 import ImpactPyramid from '../components/diagrams/ImpactPyramid'
 import AmplificationFlow from '../components/diagrams/AmplificationFlow'
 import TwoDocuments from '../components/diagrams/TwoDocuments'
@@ -135,7 +135,7 @@ export default function Philosophy() {
                 When something goes wrong now, it's not a tool problem. It's a sequencing problem. That shift matters: with tested building blocks, you stop worrying about correctness and start thinking about orchestration.
               </p>
             </div>
-            <CycleDiagram />
+            <PRCycleDiagram />
           </div>
         }
       />
