@@ -2,21 +2,21 @@ import { motion } from 'framer-motion'
 import { draw, fade, DiagramWrapper } from './variants'
 
 const workstreams = [
-  { label: 'Finance', y: 65, dots: [0.25, 0.55, 0.85] },
-  { label: 'CLI', y: 95, dots: [0.2, 0.5, 0.75, 0.95] },
+  { label: 'Finance', y: 55, dots: [0.25, 0.55, 0.85] },
+  { label: 'CLI', y: 90, dots: [0.2, 0.5, 0.75, 0.95] },
   { label: 'Clickhouse', y: 125, dots: [0.3, 0.6, 0.9] },
-  { label: 'Mobile', y: 155, dots: [0.15, 0.45, 0.7] },
+  { label: 'Mobile', y: 160, dots: [0.15, 0.45, 0.7] },
 ]
 
 const humanX = 28
-const humanY = 110
-const streamStartX = 58
-const streamEndX = 185
+const humanY = 108
+const streamStartX = 90
+const streamEndX = 200
 
 export default function HackathonTimeline() {
   return (
     <DiagramWrapper>
-      <svg viewBox="-15 0 215 200" className="w-full h-full">
+      <svg viewBox="-15 0 230 200" className="w-full h-full">
         {/* Human node */}
         <motion.circle
           cx={humanX}
@@ -40,7 +40,7 @@ export default function HackathonTimeline() {
         />
         <motion.text
           x={humanX}
-          y={humanY + 18}
+          y={humanY + 20}
           textAnchor="middle"
           fill="#f59e0b"
           fillOpacity="0.6"
