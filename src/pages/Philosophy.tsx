@@ -14,6 +14,8 @@ import AmplificationFlow from '../components/diagrams/AmplificationFlow'
 import TwoDocuments from '../components/diagrams/TwoDocuments'
 import HarnessLoop from '../components/diagrams/HarnessLoop'
 import ParallelLeads from '../components/diagrams/ParallelLeads'
+import MultiRepoLeads from '../components/diagrams/MultiRepoLeads'
+import AnchorIntegration from '../components/diagrams/AnchorIntegration'
 import HackathonTimeline from '../components/diagrams/HackathonTimeline'
 import AltitudeProgression from '../components/diagrams/AltitudeProgression'
 import ComposedStack from '../components/diagrams/ComposedStack'
@@ -388,8 +390,64 @@ export default function Philosophy() {
         }
       />
 
-      {/* 15. 4 projects. 2 days. */}
-      <Section bg="summit" align="center" sectionNumber={15} className="relative">
+      {/* 15. Multi-repo — fullstack leads */}
+      <SplitSection
+        bg="elevated"
+        headlineSide="left"
+        sectionNumber={15}
+        headline={
+          <>
+            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Multi-Repo</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
+              One feature, <strong className="text-accent">multiple repos</strong>
+            </h2>
+          </>
+        }
+        content={
+          <div className="space-y-6">
+            <div className="text-text-secondary text-lg space-y-4">
+              <p>
+                Most real features don't live in one repo. A fullstack change needs a backend API, a frontend that calls it, and sometimes shared types or infrastructure between them. One engineer, multiple codebases, all needing to stay in sync.
+              </p>
+              <p>
+                Leads solve this naturally. Each lead targets a repo with its own harness loop. A backend lead builds the API. A frontend lead builds the UI. They run <strong className="text-text-primary">simultaneously</strong> against separate codebases, each with its own plan, its own context, its own review cycle.
+              </p>
+            </div>
+            <MultiRepoLeads />
+          </div>
+        }
+      />
+
+      {/* 16. Anchors and integration review */}
+      <SplitSection
+        bg="warm"
+        headlineSide="right"
+        sectionNumber={16}
+        headline={
+          <>
+            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Integration</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
+              Anchors at the <strong className="text-accent">boundaries</strong>
+            </h2>
+          </>
+        }
+        content={
+          <div className="space-y-6">
+            <div className="text-text-secondary text-lg space-y-4">
+              <p>
+                When leads work across repos, the integration surface becomes the risk. The API contract is the anchor: both sides agree on the shape of the data before either side writes a line of implementation.
+              </p>
+              <p>
+                Code review shifts focus. Instead of reviewing every line in isolation, you review the <strong className="text-text-primary">integration points</strong>: does the frontend call match the backend contract? Do the types align? The anchor makes the review targeted and high-leverage instead of exhaustive.
+              </p>
+            </div>
+            <AnchorIntegration />
+          </div>
+        }
+      />
+
+      {/* 17. 4 projects. 2 days. */}
+      <Section bg="summit" align="center" sectionNumber={17} className="relative">
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -406,11 +464,11 @@ export default function Philosophy() {
         <HackathonTimeline />
       </Section>
 
-      {/* 16. Start anywhere on the journey */}
+      {/* 18. Start anywhere on the journey */}
       <SplitSection
         bg="base"
         headlineSide="left"
-        sectionNumber={16}
+        sectionNumber={18}
         headline={
           <>
             <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Meet You Where You Are</span>
@@ -434,8 +492,8 @@ export default function Philosophy() {
         }
       />
 
-      {/* 17. Workflows composed of workflows — Close */}
-      <Section bg="elevated" align="center" sectionNumber={17}>
+      {/* 19. Workflows composed of workflows — Close */}
+      <Section bg="elevated" align="center" sectionNumber={19}>
         <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The Close</span>
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6">
           Workflows composed of <strong className="text-accent">workflows</strong>
