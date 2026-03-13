@@ -506,7 +506,7 @@ export default function Philosophy() {
         </div>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button variant="primary" href="/">Explore the Platform</Button>
-          <Button variant="secondary" href="https://github.com/anthropics/claude-code">Get Started</Button>
+          <Button variant="secondary" href="https://github.com/donovan-yohan/belayer">Get Started</Button>
         </div>
       </Section>
     </>
