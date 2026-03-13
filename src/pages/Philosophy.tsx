@@ -388,7 +388,7 @@ export default function Philosophy() {
         }
       />
 
-      {/* 15. 3 projects. 2 days. */}
+      {/* 15. 4 projects. 2 days. */}
       <Section bg="summit" align="center" sectionNumber={15} className="relative">
         <div
           className="absolute inset-0 pointer-events-none"
@@ -398,14 +398,12 @@ export default function Philosophy() {
         />
         <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Proof Point</span>
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6">
-          3 projects. 2 <strong className="text-accent">days.</strong>
+          4 projects. 2 <strong className="text-accent">days.</strong>
         </h2>
         <p className="text-text-secondary text-lg mb-8 max-w-xl mx-auto">
-          A hackathon. Listen to the finance team, take notes, create a design doc, dispatch leads. While those run: brainstorm CLI improvements, configure a dynamic Clickhouse endpoint, prototype Claude from mobile. The human works as <strong className="text-text-primary">architect</strong>, setting direction instead of writing every line.
+          A hackathon. Four separate features, each needing discovery, a working demo, and stakeholder feedback. The human spent most of those two days in conversations: understanding requirements, reviewing demos, iterating on feedback. The implementation happened in the background. When it was time to present, each project had a working prototype.
         </p>
-        <div className="max-w-sm mx-auto">
-          <HackathonTimeline />
-        </div>
+        <HackathonTimeline />
       </Section>
 
       {/* 16. Start anywhere on the journey */}
