@@ -4,7 +4,8 @@ import PeekHint from '../components/PeekHint'
 import SkillTag from '../components/SkillTag'
 import Button from '../components/Button'
 import ThreeHats from '../components/diagrams/ThreeHats'
-import BoundaryDiagram from '../components/diagrams/BoundaryDiagram'
+import ClearStartEndDiagram from '../components/diagrams/ClearStartEndDiagram'
+import BoundaryCrossingDiagram from '../components/diagrams/BoundaryCrossingDiagram'
 import BuildingBlocks from '../components/diagrams/BuildingBlocks'
 import PRCycleDiagram from '../components/diagrams/PRCycleDiagram'
 import ImpactPyramid from '../components/diagrams/ImpactPyramid'
@@ -51,19 +52,47 @@ export default function Philosophy() {
                 If a tool that refines is also the tool that implements, context explodes. The agent tries to hold everything at once: the problem definition, the architecture, the code, the tests. Quality drops everywhere.
               </p>
               <p>
-                Crossing a boundary <em>is</em> its own tool. Something great at planning, something great at implementing, and something that gets them talking. That's a system.
+                A bounded tool knows exactly what it receives and exactly what it produces. No ambiguity about when it starts or when it's done. That constraint is what makes it reliable.
               </p>
             </div>
-            <BoundaryDiagram />
+            <ClearStartEndDiagram />
           </div>
         }
       />
 
-      {/* 2. Opening a PR */}
+      {/* 2. Crossing a boundary is its own tool */}
       <SplitSection
         bg="warm"
         headlineSide="right"
         sectionNumber={2}
+        headline={
+          <>
+            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The Insight</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
+              Crossing a boundary <strong className="text-accent">is its own tool</strong>
+            </h2>
+          </>
+        }
+        content={
+          <div className="space-y-6">
+            <div className="text-text-secondary text-lg space-y-4">
+              <p>
+                The handoff between tools isn't just an arrow on a diagram. It's work: translating one tool's output into the next tool's input. Something great at planning, something great at implementing, and something that gets them talking.
+              </p>
+              <p>
+                That's a system. Each boundary crossing has its own clear start and end, its own contract. When something breaks, you know exactly where to look.
+              </p>
+            </div>
+            <BoundaryCrossingDiagram />
+          </div>
+        }
+      />
+
+      {/* 3. Opening a PR */}
+      <SplitSection
+        bg="deep"
+        headlineSide="left"
+        sectionNumber={3}
         headline={
           <>
             <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The First Workflow</span>
@@ -84,11 +113,11 @@ export default function Philosophy() {
         }
       />
 
-      {/* 3. What comes next? */}
+      {/* 4. What comes next? */}
       <SplitSection
-        bg="deep"
-        headlineSide="left"
-        sectionNumber={3}
+        bg="elevated"
+        headlineSide="right"
+        sectionNumber={4}
         headline={
           <>
             <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Composition</span>
@@ -112,11 +141,11 @@ export default function Philosophy() {
         }
       />
 
-      {/* 4. The First Loop */}
+      {/* 5. The First Loop */}
       <SplitSection
-        bg="elevated"
-        headlineSide="right"
-        sectionNumber={4}
+        bg="warm"
+        headlineSide="left"
+        sectionNumber={5}
         headline={
           <>
             <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The First Loop</span>
@@ -140,8 +169,8 @@ export default function Philosophy() {
         }
       />
 
-      {/* 5. Errors compound upstream */}
-      <Section bg="summit" align="center" sectionNumber={5} className="relative">
+      {/* 6. Errors compound upstream */}
+      <Section bg="summit" align="center" sectionNumber={6} className="relative">
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -167,11 +196,11 @@ export default function Philosophy() {
         </div>
       </Section>
 
-      {/* 6. Two documents, two problems */}
+      {/* 7. Two documents, two problems */}
       <SplitSection
         bg="base"
-        headlineSide="left"
-        sectionNumber={6}
+        headlineSide="right"
+        sectionNumber={7}
         headline={
           <>
             <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Validation Gates</span>
@@ -195,11 +224,11 @@ export default function Philosophy() {
         }
       />
 
-      {/* 7. Agents need context beyond code */}
+      {/* 8. Agents need context beyond code */}
       <SplitSection
         bg="elevated"
-        headlineSide="right"
-        sectionNumber={7}
+        headlineSide="left"
+        sectionNumber={8}
         headline={
           <>
             <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Persistent Context</span>
@@ -220,11 +249,11 @@ export default function Philosophy() {
         }
       />
 
-      {/* 8. Brainstorm & Plan */}
+      {/* 9. Brainstorm & Plan */}
       <SplitSection
         bg="warm"
-        headlineSide="left"
-        sectionNumber={8}
+        headlineSide="right"
+        sectionNumber={9}
         headline={
           <>
             <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The First Two Steps</span>
@@ -245,11 +274,11 @@ export default function Philosophy() {
         }
       />
 
-      {/* 9. Orchestrate */}
+      {/* 10. Orchestrate */}
       <SplitSection
         bg="deep"
-        headlineSide="right"
-        sectionNumber={9}
+        headlineSide="left"
+        sectionNumber={10}
         headline={
           <>
             <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Execution</span>
@@ -270,11 +299,11 @@ export default function Philosophy() {
         }
       />
 
-      {/* 10. Review */}
+      {/* 11. Review */}
       <SplitSection
         bg="elevated"
-        headlineSide="left"
-        sectionNumber={10}
+        headlineSide="right"
+        sectionNumber={11}
         headline={
           <>
             <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Independent Review</span>
@@ -295,11 +324,11 @@ export default function Philosophy() {
         }
       />
 
-      {/* 11. Reflect */}
+      {/* 12. Reflect */}
       <SplitSection
         bg="base"
-        headlineSide="right"
-        sectionNumber={11}
+        headlineSide="left"
+        sectionNumber={12}
         headline={
           <>
             <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Closing the Loop</span>
@@ -320,8 +349,8 @@ export default function Philosophy() {
         }
       />
 
-      {/* 12. The Full Loop — the payoff */}
-      <Section bg="warm" align="center" sectionNumber={12}>
+      {/* 13. The Full Loop — the payoff */}
+      <Section bg="warm" align="center" sectionNumber={13}>
         <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The Harness Workflow</span>
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6">
           The full <strong className="text-accent">loop</strong>
@@ -334,11 +363,11 @@ export default function Philosophy() {
         </div>
       </Section>
 
-      {/* 13. What if the requirement is larger? */}
+      {/* 14. What if the requirement is larger? */}
       <SplitSection
         bg="deep"
-        headlineSide="left"
-        sectionNumber={13}
+        headlineSide="right"
+        sectionNumber={14}
         headline={
           <>
             <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Scaling Up</span>
@@ -362,8 +391,8 @@ export default function Philosophy() {
         }
       />
 
-      {/* 14. 3 projects. 2 days. */}
-      <Section bg="summit" align="center" sectionNumber={14} className="relative">
+      {/* 15. 3 projects. 2 days. */}
+      <Section bg="summit" align="center" sectionNumber={15} className="relative">
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -382,11 +411,11 @@ export default function Philosophy() {
         </div>
       </Section>
 
-      {/* 15. Start anywhere on the journey */}
+      {/* 16. Start anywhere on the journey */}
       <SplitSection
         bg="base"
-        headlineSide="right"
-        sectionNumber={15}
+        headlineSide="left"
+        sectionNumber={16}
         headline={
           <>
             <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Meet You Where You Are</span>
@@ -410,8 +439,8 @@ export default function Philosophy() {
         }
       />
 
-      {/* 16. Workflows composed of workflows — Close */}
-      <Section bg="elevated" align="center" sectionNumber={16}>
+      {/* 17. Workflows composed of workflows — Close */}
+      <Section bg="elevated" align="center" sectionNumber={17}>
         <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The Close</span>
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6">
           Workflows composed of <strong className="text-accent">workflows</strong>
