@@ -1,5 +1,6 @@
 import Section from '../components/Section'
 import SplitSection from '../components/SplitSection'
+import DiagramCarousel from '../components/DiagramCarousel'
 import PeekHint from '../components/PeekHint'
 import SkillTag from '../components/SkillTag'
 import Button from '../components/Button'
@@ -184,16 +185,12 @@ export default function Philosophy() {
         <p className="text-text-secondary text-lg mb-8 max-w-xl mx-auto">
           A bad line of code is a bad line of code. But a bad line of plan could lead to hundreds of bad lines of code. A bad line of research, a misunderstanding of how the codebase works or where certain functionality lives, could land you with thousands of bad lines of code. If we can't make small tools reliable, or small loops reliable, it just amplifies at scale. Human attention belongs at the highest-leverage points: not reviewing output, but validating direction.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-          <div className="flex flex-col items-center gap-3">
-            <ImpactPyramid />
-            <p className="text-text-muted text-sm">Impact hierarchy: errors multiply as they flow down</p>
-          </div>
-          <div className="flex flex-col items-center gap-3">
-            <AmplificationFlow />
-            <p className="text-text-muted text-sm">Amplification cascade: one bad input dominates output</p>
-          </div>
-        </div>
+        <DiagramCarousel
+          slides={[
+            { diagram: <ImpactPyramid />, caption: 'Impact hierarchy: errors multiply as they flow down' },
+            { diagram: <AmplificationFlow />, caption: 'Amplification cascade: one bad input dominates output' },
+          ]}
+        />
       </Section>
 
       {/* 7. Two documents, two problems */}
