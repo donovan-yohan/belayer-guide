@@ -1,514 +1,227 @@
-import Section from '../components/Section'
-import SplitSection from '../components/SplitSection'
-import DiagramCarousel from '../components/DiagramCarousel'
-import PeekHint from '../components/PeekHint'
-import SkillTag from '../components/SkillTag'
-import Button from '../components/Button'
-import ThreeHats from '../components/diagrams/ThreeHats'
-import ClearStartEndDiagram from '../components/diagrams/ClearStartEndDiagram'
-import BoundaryCrossingDiagram from '../components/diagrams/BoundaryCrossingDiagram'
-import BuildingBlocks from '../components/diagrams/BuildingBlocks'
-import PRCycleDiagram from '../components/diagrams/PRCycleDiagram'
-import ImpactPyramid from '../components/diagrams/ImpactPyramid'
-import AmplificationFlow from '../components/diagrams/AmplificationFlow'
-import TwoDocuments from '../components/diagrams/TwoDocuments'
-import HarnessLoop from '../components/diagrams/HarnessLoop'
-import ParallelLeads from '../components/diagrams/ParallelLeads'
-import MultiRepoLeads from '../components/diagrams/MultiRepoLeads'
-import AnchorIntegration from '../components/diagrams/AnchorIntegration'
-import HackathonTimeline from '../components/diagrams/HackathonTimeline'
-import AltitudeProgression from '../components/diagrams/AltitudeProgression'
-import ComposedStack from '../components/diagrams/ComposedStack'
+import { useState, useEffect, useCallback } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import PhilosophyV1 from './PhilosophyV1'
+import PhilosophyV2 from './PhilosophyV2'
+import PhilosophyArchive from '../components/PhilosophyArchive'
+import type { PhilosophyVersion } from '../components/PhilosophyArchive'
+
+const versions: PhilosophyVersion[] = [
+  {
+    id: 'v2',
+    title: 'Three Roles, Three Phases',
+    subtitle: 'Top-down: orchestrator, harness, agent. Three phases of orchestration.',
+    date: 'March 2026',
+    current: true,
+  },
+  {
+    id: 'v1',
+    title: 'Three Hats, One Engineer',
+    subtitle: 'Bottom-up: start with small tools, compose them into workflows.',
+    date: 'March 2026',
+  },
+]
+
+const versionContent: Record<string, React.ComponentType> = {
+  v2: PhilosophyV2,
+  v1: PhilosophyV1,
+}
 
 export default function Philosophy() {
+  const [activeVersion, setActiveVersion] = useState('v2')
+  const [showFab, setShowFab] = useState(true)
+  const [modalOpen, setModalOpen] = useState(false)
+
+  const currentVersion = versions.find((v) => v.id === activeVersion)
+  const isViewingArchived = !currentVersion?.current
+
+  const handleVersionChange = useCallback((id: string) => {
+    setActiveVersion(id)
+    setModalOpen(false)
+    // Immediate scroll — smooth can race with React re-render
+    window.scrollTo(0, 0)
+  }, [])
+
+  // Hide FAB when inline archive section is visible
+  useEffect(() => {
+    const archive = document.getElementById('philosophy-archive')
+    if (!archive) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowFab(!entry.isIntersecting),
+      { threshold: 0.1 }
+    )
+    observer.observe(archive)
+    return () => observer.disconnect()
+  }, [activeVersion])
+
+  // Close modal on Escape
+  useEffect(() => {
+    if (!modalOpen) return
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setModalOpen(false)
+    }
+    window.addEventListener('keydown', handleKey)
+    return () => window.removeEventListener('keydown', handleKey)
+  }, [modalOpen])
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (modalOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [modalOpen])
+
+  const Content = versionContent[activeVersion] ?? PhilosophyV2
+
   return (
     <>
-      {/* 0. Hero — Three hats, one engineer */}
-      <Section bg="base" align="center" peekHint={<PeekHint label="The boundary problem" />}>
-        <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The Meta Framework</span>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] mb-6">
-          Three hats, one <strong className="text-accent">engineer</strong>
-        </h1>
-        <p className="text-text-secondary text-base sm:text-lg max-w-xl mx-auto mb-8">
-          Every engineer wears three hats in the software development lifecycle: refinement and planning, implementation, and code review. Agentic engineering breaks down workflow the same way we break down any system: by finding the boundaries.
-        </p>
-        <ThreeHats />
-      </Section>
-
-      {/* 1. Every tool needs a clear start and end */}
-      <SplitSection
-        bg="elevated"
-        headlineSide="left"
-        sectionNumber={1}
-        headline={
-          <>
-            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The Boundary Problem</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
-              Every tool needs a clear <strong className="text-accent">start and end</strong>
-            </h2>
-          </>
-        }
-        content={
-          <div className="space-y-6">
-            <div className="text-text-secondary text-lg space-y-4">
-              <p>
-                If a tool that refines is also the tool that implements, context explodes. The agent tries to hold everything at once: the problem definition, the architecture, the code, the tests. Quality drops everywhere.
+      {/* Pinned banner when viewing an archived version */}
+      <AnimatePresence>
+        {isViewingArchived && (
+          <motion.div
+            initial={{ y: -48, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -48, opacity: 0 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            className="fixed top-16 left-0 right-0 z-40 bg-bg-elevated/90 backdrop-blur-md border-b border-white/[0.06]"
+          >
+            <div className="flex items-center justify-between px-4 sm:px-8 py-2.5 max-w-7xl mx-auto">
+              <p className="text-text-secondary text-xs sm:text-sm truncate">
+                Viewing: <span className="text-text-primary font-medium">{currentVersion?.title}</span>
+                <span className="text-text-muted ml-2 hidden sm:inline">({currentVersion?.date})</span>
               </p>
-              <p>
-                A bounded tool knows exactly what it receives and exactly what it produces. No ambiguity about when it starts or when it's done. That constraint is what makes it reliable.
-              </p>
+              <button
+                onClick={() => handleVersionChange('v2')}
+                className="shrink-0 text-accent text-xs sm:text-sm font-medium hover:text-amber-400 transition-colors ml-4"
+              >
+                Back to current →
+              </button>
             </div>
-            <ClearStartEndDiagram />
-          </div>
-        }
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Version content */}
+      <Content />
+
+      {/* Inline archive at the very bottom */}
+      <PhilosophyArchive
+        versions={versions}
+        activeVersion={activeVersion}
+        onVersionChange={handleVersionChange}
       />
 
-      {/* 2. Crossing a boundary is its own tool */}
-      <SplitSection
-        bg="warm"
-        headlineSide="right"
-        sectionNumber={2}
-        headline={
+      {/* Archive FAB — opens modal overlay */}
+      <AnimatePresence>
+        {showFab && !modalOpen && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setModalOpen(true)}
+            className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-30 bg-bg-elevated/80 backdrop-blur-sm border border-white/[0.08] rounded-full px-4 py-2.5 text-text-secondary text-xs font-medium hover:text-accent hover:border-accent/20 transition-all shadow-lg"
+            aria-label="Open archive"
+          >
+            Archive
+          </motion.button>
+        )}
+      </AnimatePresence>
+
+      {/* Archive modal overlay */}
+      <AnimatePresence>
+        {modalOpen && (
           <>
-            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The Insight</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
-              Crossing a boundary <strong className="text-accent">is its own tool</strong>
-            </h2>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
+              onClick={() => setModalOpen(false)}
+            />
+
+            {/* Modal panel */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 40 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
+              className="fixed inset-x-4 bottom-4 sm:inset-x-auto sm:bottom-8 sm:right-8 sm:left-auto sm:w-[420px] z-50 bg-bg-elevated border border-white/[0.08] rounded-2xl shadow-2xl overflow-hidden"
+            >
+              <div className="px-5 pt-5 pb-2 sm:px-6 sm:pt-6 flex items-center justify-between">
+                <div>
+                  <span className="text-xs uppercase tracking-[4px] text-accent block mb-1">
+                    Archive
+                  </span>
+                  <h3 className="text-lg font-bold">
+                    How this thinking <strong className="text-accent">evolved</strong>
+                  </h3>
+                </div>
+                <button
+                  onClick={() => setModalOpen(false)}
+                  className="text-text-muted hover:text-text-primary transition-colors p-1 -mr-1"
+                  aria-label="Close archive"
+                >
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                    <path d="M5 5l10 10M15 5l-10 10" />
+                  </svg>
+                </button>
+              </div>
+
+              <p className="text-text-secondary text-xs px-5 sm:px-6 mb-4">
+                Each version is a complete snapshot of the Belayer philosophy at a point in time.
+              </p>
+
+              <div className="px-5 pb-5 sm:px-6 sm:pb-6 space-y-2.5">
+                {versions.map((version) => {
+                  const isActive = version.id === activeVersion
+                  return (
+                    <button
+                      key={version.id}
+                      onClick={() => {
+                        if (!isActive) handleVersionChange(version.id)
+                      }}
+                      disabled={isActive}
+                      className={`w-full text-left rounded-xl px-4 py-3.5 transition-all ${
+                        isActive
+                          ? 'bg-accent/10 border border-accent/30 cursor-default'
+                          : 'bg-white/[0.03] border border-white/[0.06] hover:border-accent/20 hover:bg-white/[0.05] cursor-pointer'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2 mb-0.5">
+                        <span className="font-semibold text-text-primary text-sm truncate">
+                          {version.title}
+                        </span>
+                        {version.current && (
+                          <span className="shrink-0 text-[10px] uppercase tracking-wider text-accent font-semibold bg-accent/10 px-2 py-0.5 rounded-full">
+                            Current
+                          </span>
+                        )}
+                        {isActive && !version.current && (
+                          <span className="shrink-0 text-[10px] uppercase tracking-wider text-text-muted font-semibold bg-white/[0.06] px-2 py-0.5 rounded-full">
+                            Viewing
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex items-center justify-between gap-2">
+                        <p className="text-text-secondary text-xs truncate">
+                          {version.subtitle}
+                        </p>
+                        <span className="text-text-muted text-[10px] shrink-0">{version.date}</span>
+                      </div>
+                    </button>
+                  )
+                })}
+              </div>
+            </motion.div>
           </>
-        }
-        content={
-          <div className="space-y-6">
-            <div className="text-text-secondary text-lg space-y-4">
-              <p>
-                The handoff between tools isn't just an arrow on a diagram. It's work: translating one tool's output into the next tool's input. Something great at planning, something great at implementing, and something that gets them talking.
-              </p>
-              <p>
-                That's a system. Each boundary crossing has its own clear start and end, its own contract. When something breaks, you know exactly where to look.
-              </p>
-            </div>
-            <BoundaryCrossingDiagram />
-          </div>
-        }
-      />
-
-      {/* 3. Opening a PR */}
-      <SplitSection
-        bg="deep"
-        headlineSide="left"
-        sectionNumber={3}
-        headline={
-          <>
-            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The First Workflow</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
-              Opening a <strong className="text-accent">PR</strong>
-            </h2>
-          </>
-        }
-        content={
-          <div className="text-text-secondary text-lg space-y-4">
-            <p>
-              The first problem we solved was tedious: writing good pull requests. It pulled you out of your code to restate work you'd already done. We built <SkillTag>pr:author</SkillTag>. Clear start (implementation done), clear end (PR link).
-            </p>
-            <p>
-              Small scope made it obvious when it was working and when it wasn't. That's the first insight: <strong className="text-text-primary">start with a problem small enough to verify.</strong>
-            </p>
-          </div>
-        }
-      />
-
-      {/* 4. What comes next? */}
-      <SplitSection
-        bg="elevated"
-        headlineSide="right"
-        sectionNumber={4}
-        headline={
-          <>
-            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Composition</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
-              What comes <strong className="text-accent">next?</strong>
-            </h2>
-          </>
-        }
-        content={
-          <div className="space-y-6">
-            <div className="text-text-secondary text-lg space-y-4">
-              <p>
-                If an agent can write PRs, it can review them too. <SkillTag>pr:review</SkillTag> catches issues against project conventions. <SkillTag>pr:resolve</SkillTag> addresses review feedback automatically.
-              </p>
-              <p>
-                Each tool solves one problem well. But what happens when you connect them?
-              </p>
-            </div>
-            <BuildingBlocks />
-          </div>
-        }
-      />
-
-      {/* 5. The First Loop */}
-      <SplitSection
-        bg="warm"
-        headlineSide="left"
-        sectionNumber={5}
-        headline={
-          <>
-            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The First Loop</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
-              Small tools, first <strong className="text-accent">cycle</strong>
-            </h2>
-          </>
-        }
-        content={
-          <div className="space-y-6">
-            <div className="text-text-secondary text-lg space-y-4">
-              <p>
-                The PR cycle is the first composed workflow. Author writes the PR, review catches issues, resolve addresses them, review checks again. The loop runs until the PR is clean.
-              </p>
-              <p>
-                When something goes wrong now, it's not a tool problem. It's a sequencing problem. That shift matters: with tested building blocks, you stop worrying about correctness and start thinking about orchestration.
-              </p>
-            </div>
-            <PRCycleDiagram />
-          </div>
-        }
-      />
-
-      {/* 6. Errors compound upstream */}
-      <Section bg="summit" align="center" sectionNumber={6} className="relative">
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: 'radial-gradient(ellipse at center, rgba(245,158,11,0.08) 0%, transparent 70%)',
-          }}
-        />
-        <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Error Amplification</span>
-        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6">
-          Errors compound <strong className="text-accent">upstream</strong>
-        </h2>
-        <p className="text-text-secondary text-lg mb-8 max-w-xl mx-auto">
-          A bad line of code is a bad line of code. But a bad line of plan could lead to hundreds of bad lines of code. A bad line of research, a misunderstanding of how the codebase works or where certain functionality lives, could land you with thousands of bad lines of code. If we can't make small tools reliable, or small loops reliable, it just amplifies at scale. Human attention belongs at the highest-leverage points: not reviewing output, but validating direction.
-        </p>
-        <DiagramCarousel
-          slides={[
-            { diagram: <ImpactPyramid />, caption: 'Impact hierarchy: errors multiply as they flow down' },
-            { diagram: <AmplificationFlow />, caption: 'Amplification cascade: one bad input dominates output' },
-          ]}
-        />
-      </Section>
-
-      {/* 7. Two documents, two problems */}
-      <SplitSection
-        bg="base"
-        headlineSide="right"
-        sectionNumber={7}
-        headline={
-          <>
-            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Validation Gates</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
-              Two documents, two <strong className="text-accent">problems</strong>
-            </h2>
-          </>
-        }
-        content={
-          <div className="space-y-6">
-            <div className="text-text-secondary text-lg space-y-4">
-              <p>
-                If errors compound upstream, you need to catch them upstream. The design doc validates that the <em>problem</em> is correct: are we solving the right thing? The plan catches hallucinations by reading every file before modifying any.
-              </p>
-              <p>
-                Different tools for different problems. The design doc is exploratory and divergent. The plan is structured and convergent. Conflating them is how you get 10,000 wrong lines.
-              </p>
-            </div>
-            <TwoDocuments />
-          </div>
-        }
-      />
-
-      {/* 8. Agents need context beyond code */}
-      <SplitSection
-        bg="elevated"
-        headlineSide="left"
-        sectionNumber={8}
-        headline={
-          <>
-            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Persistent Context</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
-              Agents need context beyond <strong className="text-accent">code</strong>
-            </h2>
-          </>
-        }
-        content={
-          <div className="text-text-secondary text-lg space-y-4">
-            <p>
-              Code alone isn't enough for informed decisions. An agent reading a function doesn't know <em>why</em> that function exists, what trade-off it represents, or what the team tried before.
-            </p>
-            <p>
-              Agents need the same thing new engineers need: onboarding, product context, tribal knowledge. Persistent documentation captures the <strong className="text-text-primary">why</strong>: architecture decisions, design rationale, project goals. Every agent session starts informed instead of guessing.
-            </p>
-          </div>
-        }
-      />
-
-      {/* 9. Brainstorm & Plan */}
-      <SplitSection
-        bg="warm"
-        headlineSide="right"
-        sectionNumber={9}
-        headline={
-          <>
-            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The First Two Steps</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
-              Brainstorm and <strong className="text-accent">plan</strong>
-            </h2>
-          </>
-        }
-        content={
-          <div className="text-text-secondary text-lg space-y-4">
-            <p>
-              Brainstorm explores the problem space. What are we building? Why? What have we tried before? The output is a design doc that captures the thinking.
-            </p>
-            <p>
-              Plan reads every file it will touch before writing a single line. The output is a structured implementation plan. Two documents, two checkpoints. The first validates the problem. The second validates the approach.
-            </p>
-          </div>
-        }
-      />
-
-      {/* 10. Orchestrate */}
-      <SplitSection
-        bg="deep"
-        headlineSide="left"
-        sectionNumber={10}
-        headline={
-          <>
-            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Execution</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
-              <strong className="text-accent">Orchestrate</strong>
-            </h2>
-          </>
-        }
-        content={
-          <div className="text-text-secondary text-lg space-y-4">
-            <p>
-              With a validated plan, agent teams execute using the same small, tested tools from earlier. Each task has a clear start, clear end, and a known-good tool to run it.
-            </p>
-            <p>
-              The plan drives the work. The tools do the work. The orchestrator sequences them.
-            </p>
-          </div>
-        }
-      />
-
-      {/* 11. Review */}
-      <SplitSection
-        bg="elevated"
-        headlineSide="right"
-        sectionNumber={11}
-        headline={
-          <>
-            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Independent Review</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
-              A fresh pair of <strong className="text-accent">eyes</strong>
-            </h2>
-          </>
-        }
-        content={
-          <div className="text-text-secondary text-lg space-y-4">
-            <p>
-              The review step uses a separate agent that reads only the output, not the plan that produced it. It's not anchored to the same assumptions the builder had.
-            </p>
-            <p>
-              A code review from a context that never saw the plan catches different things than one that did. That independence is the point.
-            </p>
-          </div>
-        }
-      />
-
-      {/* 12. Reflect */}
-      <SplitSection
-        bg="base"
-        headlineSide="left"
-        sectionNumber={12}
-        headline={
-          <>
-            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Closing the Loop</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
-              Check against the <strong className="text-accent">docs</strong>
-            </h2>
-          </>
-        }
-        content={
-          <div className="text-text-secondary text-lg space-y-4">
-            <p>
-              After review, the reflect step compares what was built against the project's persistent documentation. Did a design decision drift? Is there a new pattern that should be recorded?
-            </p>
-            <p>
-              Reflect captures learnings and updates context so the next session starts with accurate information instead of stale docs.
-            </p>
-          </div>
-        }
-      />
-
-      {/* 13. The Full Loop — the payoff */}
-      <Section bg="warm" align="center" sectionNumber={13}>
-        <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The Harness Workflow</span>
-        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6">
-          The full <strong className="text-accent">loop</strong>
-        </h2>
-        <p className="text-text-secondary text-lg mb-8 max-w-xl mx-auto">
-          That's the complete cycle. Brainstorm the design. Plan the implementation. Orchestrate agent teams to build it. Review with an independent context. Reflect to keep the docs honest. Each step is its own job because each step solves a different problem. The review step is what keeps agents honest. The reflect step is what keeps the knowledge alive.
-        </p>
-        <div className="max-w-xs mx-auto">
-          <HarnessLoop />
-        </div>
-      </Section>
-
-      {/* 14. What if the requirement is larger? */}
-      <SplitSection
-        bg="deep"
-        headlineSide="right"
-        sectionNumber={14}
-        headline={
-          <>
-            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Scaling Up</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
-              What if the requirement is <strong className="text-accent">larger?</strong>
-            </h2>
-          </>
-        }
-        content={
-          <div className="space-y-6">
-            <div className="text-text-secondary text-lg space-y-4">
-              <p>
-                Leads. Each lead runs a full harness loop: brainstorm, plan, orchestrate, review, reflect. Planned and executed independently per goal. A setter coordinates, decomposing a specification into independent climbs.
-              </p>
-              <p>
-                Independent goals run <strong className="text-text-primary">simultaneously</strong>. Three leads working three features isn't three times as slow. It's roughly the same wall-clock time as one, with the setter ensuring they don't collide.
-              </p>
-            </div>
-            <ParallelLeads />
-          </div>
-        }
-      />
-
-      {/* 15. Multi-repo — fullstack leads */}
-      <SplitSection
-        bg="elevated"
-        headlineSide="left"
-        sectionNumber={15}
-        headline={
-          <>
-            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Multi-Repo</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
-              One feature, <strong className="text-accent">multiple repos</strong>
-            </h2>
-          </>
-        }
-        content={
-          <div className="space-y-6">
-            <div className="text-text-secondary text-lg space-y-4">
-              <p>
-                Most real features don't live in one repo. A fullstack change needs a backend API, a frontend that calls it, and sometimes shared types or infrastructure between them. One engineer, multiple codebases, all needing to stay in sync.
-              </p>
-              <p>
-                Leads solve this naturally. Each lead targets a repo with its own harness loop. A backend lead builds the API. A frontend lead builds the UI. They run <strong className="text-text-primary">simultaneously</strong> against separate codebases, each with its own plan, its own context, its own review cycle.
-              </p>
-            </div>
-            <MultiRepoLeads />
-          </div>
-        }
-      />
-
-      {/* 16. Anchors and integration review */}
-      <SplitSection
-        bg="warm"
-        headlineSide="right"
-        sectionNumber={16}
-        headline={
-          <>
-            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Integration</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
-              Anchors at the <strong className="text-accent">boundaries</strong>
-            </h2>
-          </>
-        }
-        content={
-          <div className="space-y-6">
-            <div className="text-text-secondary text-lg space-y-4">
-              <p>
-                When leads work across repos, the integration surface becomes the risk. The API contract is the anchor: both sides agree on the shape of the data before either side writes a line of implementation.
-              </p>
-              <p>
-                Code review shifts focus. Instead of reviewing every line in isolation, you review the <strong className="text-text-primary">integration points</strong>: does the frontend call match the backend contract? Do the types align? The anchor makes the review targeted and high-leverage instead of exhaustive.
-              </p>
-            </div>
-            <AnchorIntegration />
-          </div>
-        }
-      />
-
-      {/* 17. 4 projects. 2 days. */}
-      <Section bg="summit" align="center" sectionNumber={17} className="relative">
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: 'radial-gradient(ellipse at center, rgba(245,158,11,0.08) 0%, transparent 70%)',
-          }}
-        />
-        <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Proof Point</span>
-        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6">
-          4 projects. 2 <strong className="text-accent">days.</strong>
-        </h2>
-        <p className="text-text-secondary text-lg mb-8 max-w-xl mx-auto">
-          A hackathon. Four separate features, each needing discovery, a working demo, and stakeholder feedback. The human spent most of those two days in conversations: understanding requirements, reviewing demos, iterating on feedback. The implementation happened in the background. When it was time to present, each project had a working prototype.
-        </p>
-        <HackathonTimeline />
-      </Section>
-
-      {/* 18. Start anywhere on the journey */}
-      <SplitSection
-        bg="base"
-        headlineSide="left"
-        sectionNumber={18}
-        headline={
-          <>
-            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Meet You Where You Are</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
-              Start anywhere on the <strong className="text-accent">journey</strong>
-            </h2>
-          </>
-        }
-        content={
-          <div className="space-y-6">
-            <div className="text-text-secondary text-lg space-y-4">
-              <p>
-                The stack meets engineers wherever they are. Start with the <SkillTag>pr:author</SkillTag> plugin to automate your PR workflow. Grow into harness commands for structured design-plan-execute cycles. Graduate to <SkillTag>harness:loop</SkillTag> for fully autonomous runs. Scale to belayer for multi-repo orchestration.
-              </p>
-              <p>
-                Each layer is composed of workflows you already know work. No leap of faith required, just the next step up.
-              </p>
-            </div>
-            <AltitudeProgression />
-          </div>
-        }
-      />
-
-      {/* 19. Workflows composed of workflows — Close */}
-      <Section bg="elevated" align="center" sectionNumber={19}>
-        <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The Close</span>
-        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6">
-          Workflows composed of <strong className="text-accent">workflows</strong>
-        </h2>
-        <p className="text-text-secondary text-lg mb-8 max-w-xl mx-auto">
-          That's the meta-framework principle. Architecture doesn't come from grand upfront design. It comes from real needs, tested at each level. When something breaks, you know exactly where to look: the tool, the orchestration, or the specification. Each layer is built from the layer below.
-        </p>
-        <div className="max-w-sm mx-auto mb-10">
-          <ComposedStack />
-        </div>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button variant="primary" href="/">Explore the Platform</Button>
-          <Button variant="secondary" href="https://github.com/donovan-yohan/belayer">Get Started</Button>
-        </div>
-      </Section>
+        )}
+      </AnimatePresence>
     </>
   )
 }

@@ -9,7 +9,7 @@ The site has two main pages: Home (landing) and Philosophy (narrative deep-dive)
 ## Code Map
 
 ### `src/pages/`
-Top-level route pages: `Home.tsx` and `Philosophy.tsx`. Pure composition of components.
+Top-level route pages: `Home.tsx` and `Philosophy.tsx` (v2 — three roles/three phases). `PhilosophyV1.tsx` preserves the original bottom-up narrative for future archive feature. Pure composition of components.
 
 ### `src/components/`
 Flat directory of reusable UI: Section, SplitSection, SectionGraphic, Carousel, Button, Nav, ProgressBar, RopeThread, PeekHint, SkillTag, Layout.
