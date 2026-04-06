@@ -7,6 +7,7 @@ import ThreeDemands from '../components/diagrams/ThreeDemands'
 import ThreeLayers from '../components/diagrams/ThreeLayers'
 import ThreePhases from '../components/diagrams/ThreePhases'
 import ContextRouting from '../components/diagrams/ContextRouting'
+import TelemetryLayer from '../components/diagrams/TelemetryLayer'
 import ThreeContracts from '../components/diagrams/ThreeContracts'
 
 export default function PhilosophyV3() {
@@ -447,8 +448,42 @@ export default function PhilosophyV3() {
         }
       />
 
-      {/* 17. Close — Here's where we are */}
-      <Section bg="base" align="center" sectionNumber={17}>
+      {/* 17. Telemetry as Prerequisite */}
+      <SplitSection
+        bg="base"
+        headlineSide="left"
+        sectionNumber={17}
+        headline={
+          <>
+            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The Missing Piece</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
+              You can't learn from what you can't <strong className="text-accent">see</strong>
+            </h2>
+          </>
+        }
+        content={
+          <div className="space-y-6">
+            <div className="text-text-secondary text-lg space-y-4">
+              <p>
+                There's one more requirement that cuts across all three layers: telemetry. If you're going to swap models, swap harnesses, swap orchestrators — you need to know what changed and whether it made things better or worse.
+              </p>
+              <p>
+                Without rich, queryable data on every run — what model wrote this code, what session produced this PR, what plan led to this outcome — you're flying blind. You can't run evals. You can't catch regressions. You can't answer "did switching from Opus to Gemini for planning actually improve spec quality?"
+              </p>
+              <p>
+                This is what Carabiner proposes: not a telemetry system, but a requirement that one exists. The data is already being produced — git history, session transcripts, model attribution. The missing piece is the join layer that connects code to the session that wrote it, the session to the model that ran it, the model to the pipeline that triggered it.
+              </p>
+              <p>
+                Carabiner doesn't have opinions about how you collect this data. It has opinions about what must be queryable: which agent wrote which lines, in what session, with what confidence. The rest — how you store it, how you visualize it, how you build evals on top — is yours. But if your system can't answer "what happened and why," it can't learn. And a system that can't learn is just automation with a shelf life.
+              </p>
+            </div>
+            <TelemetryLayer />
+          </div>
+        }
+      />
+
+      {/* 18. Close — Here's where we are */}
+      <Section bg="elevated" align="center" sectionNumber={18}>
         <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The Close</span>
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] mb-6">
           Here's where we <strong className="text-accent">are</strong>
