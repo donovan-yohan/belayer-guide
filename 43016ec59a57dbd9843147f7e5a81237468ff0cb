@@ -1,0 +1,37 @@
+src/components/diagrams/DumbZone.tsx
+  346711dce37c71eb 1-119
+src/pages/PhilosophyV3.tsx
+  346711dce37c71eb 1-469
+docs/design-docs/index.md
+  346711dce37c71eb 7
+src/components/diagrams/ContextRouting.tsx
+  346711dce37c71eb 1-154
+src/components/diagrams/ThreeLayers.tsx
+  346711dce37c71eb 1-152
+src/components/diagrams/ThreeDemands.tsx
+  346711dce37c71eb 1-135
+src/pages/Philosophy.tsx
+  346711dce37c71eb 5,11-16,32,38,85,105
+docs/design-docs/2026-04-06-philosophy-v3-context-constraint-design.md
+  346711dce37c71eb 1-189
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.5",
+  "base_commit_sha": "43016ec59a57dbd9843147f7e5a81237468ff0cb",
+  "prompts": {
+    "346711dce37c71eb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "815d0c1b-9d2e-4174-a9f4-9df01e158b5c",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Donovan Yohan",
+      "messages": [],
+      "total_additions": 1245,
+      "total_deletions": 18,
+      "accepted_lines": 1231,
+      "overriden_lines": 0
+    }
+  }
+}
