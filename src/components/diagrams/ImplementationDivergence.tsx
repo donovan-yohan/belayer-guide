@@ -160,7 +160,7 @@ export default function ImplementationDivergence() {
           fill="#4ade80" fontSize="10" fontWeight="700" fontFamily="monospace"
           variants={fade} custom={8.5}
         >
-          commit hash
+          PR
         </motion.text>
         <motion.text
           x={COMMIT_CX} y={COMMIT_CY + 11}

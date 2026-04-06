@@ -32,7 +32,7 @@ function polarToCart(angleDeg: number, radius: number) {
 }
 
 const nodes = [
-  { label: 'commit hash', angle: -90, green: true },
+  { label: 'PR', angle: -90, green: true },
   { label: 'CI Monitor', angle: -26, green: false },
   { label: 'Risk Gate', angle: 26, green: false },
   { label: 'Auto-merge', angle: 82, green: false },
@@ -149,7 +149,7 @@ export default function OutputLoop() {
           variants={fade}
           custom={4}
         >
-          → INTAKE
+          → EXPLORE
         </motion.text>
 
         {/* Checkmark on Auto-merge node */}

@@ -23,9 +23,9 @@ const nodeH = 50
 const nodeRx = 8
 
 // Node centers
-const outputNode = { cx: 190, cy: 60, label: 'OUTPUT' }
-const intakeNode = { cx: 330, cy: 300, label: 'INTAKE' }
-const implNode = { cx: 50, cy: 300, label: 'IMPLEMENTATION' }
+const outputNode = { cx: 190, cy: 60, label: 'SUMMIT' }
+const intakeNode = { cx: 330, cy: 300, label: 'EXPLORE' }
+const implNode = { cx: 50, cy: 300, label: 'CLIMB' }
 
 export default function FeedbackLoop() {
   return (
@@ -109,10 +109,10 @@ export default function FeedbackLoop() {
           variants={draw}
           custom={8}
         />
-        {/* "commit hash" label */}
+        {/* "PR" label */}
         <motion.text
           x={38}
-          y={170}
+          y={176}
           textAnchor="middle"
           fill="#4ade80"
           fontSize="9"
@@ -120,19 +120,7 @@ export default function FeedbackLoop() {
           variants={fade}
           custom={9}
         >
-          commit
-        </motion.text>
-        <motion.text
-          x={38}
-          y={182}
-          textAnchor="middle"
-          fill="#4ade80"
-          fontSize="9"
-          fontWeight="600"
-          variants={fade}
-          custom={9.3}
-        >
-          hash
+          PR
         </motion.text>
 
         {/* Three nodes */}

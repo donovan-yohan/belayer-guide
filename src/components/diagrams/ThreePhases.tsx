@@ -19,9 +19,9 @@ const fade = {
 }
 
 const phases = [
-  { label: 'INTAKE', x: 40 },
-  { label: 'IMPLEMENTATION', x: 195 },
-  { label: 'OUTPUT', x: 350 },
+  { label: 'EXPLORE', x: 40 },
+  { label: 'CLIMB', x: 195 },
+  { label: 'SUMMIT', x: 350 },
 ]
 
 const BOX_W = 130
@@ -104,7 +104,7 @@ export default function ThreePhases() {
           spec.md
         </motion.text>
 
-        {/* Arrow: IMPLEMENTATION → OUTPUT, with "commit hash" label */}
+        {/* Arrow: CLIMB → SUMMIT, with "PR" label */}
         <motion.line
           x1={phases[1].x + BOX_W + 1} y1={CENTER_Y}
           x2={phases[2].x - 1} y2={CENTER_Y}
@@ -126,7 +126,7 @@ export default function ThreePhases() {
           fill="#4ade80" fontSize="9" fontWeight="600" fontFamily="monospace"
           variants={fade} custom={6.8}
         >
-          commit hash
+          PR
         </motion.text>
 
         {/* Arrow out of OUTPUT, with "whatever" label */}

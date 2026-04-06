@@ -24,7 +24,7 @@ const cardRx = 10
 
 const cards = [
   { x: 20, label: 'spec.md', sublabel: 'the agreement', customBase: 0 },
-  { x: 175, label: 'commit hash', sublabel: 'the artifact', customBase: 2 },
+  { x: 175, label: 'PR', sublabel: 'the artifact', customBase: 2 },
   { x: 330, label: 'quality gate', sublabel: 'the standard', customBase: 4 },
 ]
 

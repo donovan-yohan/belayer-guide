@@ -25,15 +25,15 @@ const centerY = 88
 
 // Phase positions — spread wide
 const phases = [
-  { label: 'INTAKE', x: 30 },
-  { label: 'IMPLEMENTATION', x: 200 },
-  { label: 'OUTPUT', x: 370 },
+  { label: 'EXPLORE', x: 30 },
+  { label: 'CLIMB', x: 200 },
+  { label: 'SUMMIT', x: 370 },
 ]
 
 // Contract artifact labels floating in the gaps
 const contracts = [
   { label: 'spec.md', x: 175, y: centerY },
-  { label: 'commit hash', x: 345, y: centerY },
+  { label: 'PR', x: 345, y: centerY },
 ]
 
 export default function IndependentPhases() {
@@ -69,7 +69,7 @@ export default function IndependentPhases() {
                 y={by + boxH / 2}
                 textAnchor="middle"
                 dominantBaseline="middle"
-                fontSize={phase.label === 'IMPLEMENTATION' ? '9.5' : '11'}
+                fontSize="11"
                 fontWeight="700"
                 fill="#fafaf9"
                 fillOpacity="0.8"
@@ -83,7 +83,7 @@ export default function IndependentPhases() {
 
         {/* Contract artifact floating labels */}
         {contracts.map((contract, i) => {
-          const labelW = contract.label === 'commit hash' ? 72 : 52
+          const labelW = contract.label === 'PR' ? 32 : 52
           const labelH = 22
           const lx = contract.x - labelW / 2
           const ly = contract.y - labelH / 2

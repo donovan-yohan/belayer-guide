@@ -168,7 +168,7 @@ export default function PhilosophyV2() {
           Three phases, three <strong className="text-accent">contracts</strong>
         </h2>
         <p className="text-text-secondary text-lg mb-8 max-w-xl mx-auto">
-          Orchestration splits into three distinct phases. Each phase has one input and one output. Each phase doesn't need to know or care how the others work. Intake turns anything into a spec. Implementation turns a spec into code. Output turns code into value. That's it. Three contracts. Everything else is implementation detail.
+          Orchestration splits into three distinct phases. Each phase has one input and one output. Each phase doesn't need to know or care how the others work. Explore turns anything into a spec. Climb turns a spec into a PR. Summit turns PRs into deployed value. That's it. Three contracts. Everything else is implementation detail.
         </p>
         <ThreePhases />
       </Section>
@@ -180,7 +180,7 @@ export default function PhilosophyV2() {
         sectionNumber={6}
         headline={
           <>
-            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Intake</span>
+            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Explore</span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
               Anything becomes a <strong className="text-accent">spec</strong>
             </h2>
@@ -190,10 +190,10 @@ export default function PhilosophyV2() {
           <div className="space-y-6">
             <div className="text-text-secondary text-lg space-y-4">
               <p>
-                The input to intake is whatever you've got. A Figma file. A Jira ticket. A brainstorming session with Claude. An article you saw online that inspired something. Screenshots of a SaaS app you want to steal ideas from.
+                The input to explore is whatever you've got. A Figma file. A Jira ticket. A brainstorming session with Claude. An article you saw online that inspired something. Screenshots of a SaaS app you want to steal ideas from.
               </p>
               <p>
-                The output is always the same: a spec.md. One document that captures what needs to be built, why, and what success looks like. The intake phase doesn't care how the code will be written — it cares that the problem is well-defined.
+                The output is always the same: a spec.md. One document that captures what needs to be built, why, and what success looks like. The explore phase doesn't care how the code will be written — it cares that the problem is well-defined.
               </p>
             </div>
             <IntakeFlow />
@@ -201,16 +201,16 @@ export default function PhilosophyV2() {
         }
       />
 
-      {/* 7. Implementation */}
+      {/* 7. Climb */}
       <SplitSection
         bg="elevated"
         headlineSide="right"
         sectionNumber={7}
         headline={
           <>
-            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Implementation</span>
+            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Climb</span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
-              Spec becomes <strong className="text-accent">code</strong>
+              Spec becomes a <strong className="text-accent">PR</strong>
             </h2>
           </>
         }
@@ -218,13 +218,13 @@ export default function PhilosophyV2() {
           <div className="space-y-6">
             <div className="text-text-secondary text-lg space-y-4">
               <p>
-                The input is a spec.md. The output is a commit hash. The only assumed infrastructure is source control.
+                The input is a spec.md. The output is a PR. The per-repo pipeline runs identically whether you have one repo or ten: plan, implement, review, open the pull request.
               </p>
               <p>
-                This is where we see the most divergence. Gstack, Superpowers, Symphony — dozens of variations on how code actually gets written, how you validate it, what kind of QA runs, how you persist context between sessions. These are all important questions, but they are not technically necessary to achieve "run a nightshift." They are necessary to achieve "run a <em>useful</em> nightshift."
+                This is where we see the most divergence. Gstack, Superpowers, Symphony — dozens of variations on how code actually gets written, how you validate it, what kind of QA runs, how you persist context between sessions. Belayer doesn't pick sides. Nodes are black boxes — your pipeline is defined in YAML, and each node can be Claude Code, Codex, OpenCode, or anything else that fulfills the contract.
               </p>
               <p>
-                This is intentional. Belayer as an orchestrator doesn't need to know or care what harness you use or which agents you prefer. You bring your own. The only thing Belayer needs is the entrypoint you configure in the prompt — everything else is yours to decide.
+                This is intentional. Belayer is plumbing — an orchestration standard, not an agent that happens to orchestrate. You bring your own harness and agents. The only thing Belayer needs is the entrypoint you configure in the prompt. Everything else is yours to decide.
               </p>
             </div>
             <ImplementationDivergence />
@@ -232,16 +232,16 @@ export default function PhilosophyV2() {
         }
       />
 
-      {/* 8. Output */}
+      {/* 8. Summit */}
       <SplitSection
         bg="warm"
         headlineSide="left"
         sectionNumber={8}
         headline={
           <>
-            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Output</span>
+            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Summit</span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
-              Code becomes <strong className="text-accent">value</strong>
+              PRs become <strong className="text-accent">value</strong>
             </h2>
           </>
         }
@@ -249,10 +249,10 @@ export default function PhilosophyV2() {
           <div className="space-y-6">
             <div className="text-text-secondary text-lg space-y-4">
               <p>
-                The input is a commit hash. What do you do with it?
+                The input is a PR. What do you do with it?
               </p>
               <p>
-                Monitor CI. Establish a risk gate that can auto-merge low-risk PRs. Run regression sweeps or bug testing on a staging environment — and feed the bugs found back into intake as new tickets. The output phase is where the loop closes: finished code becomes deployed value, and any problems become new inputs.
+                Monitor CI. Establish a risk gate that can auto-merge low-risk changes. Run regression sweeps or bug testing on a staging environment — and feed the bugs found back into explore as new specs. The summit phase is where the loop closes: finished code becomes deployed value, and any problems become new inputs.
               </p>
             </div>
             <OutputLoop />
@@ -277,10 +277,10 @@ export default function PhilosophyV2() {
           <div className="space-y-6">
             <div className="text-text-secondary text-lg space-y-4">
               <p>
-                Given that these three phases don't need to know or care how the others work, you can solve each problem in whatever way is best. Use Figma for intake and Jira for tracking. Use Gstack for implementation and Vercel for deployment. Mix and match.
+                Given that these three phases don't need to know or care how the others work, you can solve each problem in whatever way is best. Use Figma for explore and Jira for tracking. Use Gstack for climb and Vercel for deployment. Mix and match.
               </p>
               <p>
-                For full automation orchestration, the only concern is how these three layers communicate with each other. And the contracts are simple: spec.md in, commit hash out, quality gate at the end. This is where Belayer's opinions as an orchestrator end.
+                For full automation, the only concern is how these three layers communicate. And the contracts are simple: spec.md in, PR out, quality gate at the end. Belayer is an orchestration standard — like Docker Compose for agents. It routes artifacts between nodes. What happens inside each node is none of its business.
               </p>
             </div>
             <IndependentPhases />
@@ -390,26 +390,26 @@ export default function PhilosophyV2() {
         }
       />
 
-      {/* 14. Multi-repo remains open */}
+      {/* 14. Multi-repo is additive */}
       <SplitSection
         bg="deep"
         headlineSide="right"
         sectionNumber={14}
         headline={
           <>
-            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">The Unsolved</span>
+            <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Multi-Repo</span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
-              Multi-repo remains <strong className="text-accent">open</strong>
+              Additive, not <strong className="text-accent">transformative</strong>
             </h2>
           </>
         }
         content={
           <div className="text-text-secondary text-lg space-y-4">
             <p>
-              One caveat where this becomes more complex: multi-repo workflows. The orchestrator distributing work across repos must have some way of collecting knowledge about each candidate repo to truly automate it. Which repo uses what framework? Where do the integration points live? What are the shared types?
+              The per-repo pipeline runs identically whether you have one repo or ten. Multi-repo doesn't change how work happens inside a repo — it adds two coordination layers on top: the setter decomposes a spec into per-repo specs (fan-out), and the spotter validates cross-repo alignment after all repos complete (fan-in).
             </p>
             <p>
-              This remains an unsolved problem in a clean way. The harness is per-repo by nature, and the orchestrator is multi-repo by nature. Bridging that gap without collapsing the boundary is the next frontier for Belayer.
+              Neither changes the climb. Each repo still gets its own harness, its own agents, its own pipeline. The setter and spotter are just more nodes — black boxes with typed contracts. Spec.md in, per-repo specs out. N PRs in, gate score out.
             </p>
           </div>
         }
@@ -424,7 +424,7 @@ export default function PhilosophyV2() {
           <>
             <span className="text-xs uppercase tracking-[4px] text-accent mb-4 block">Closing The Loop</span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.1]">
-              Output feeds back to <strong className="text-accent">intake</strong>
+              Summit feeds back to <strong className="text-accent">explore</strong>
             </h2>
           </>
         }
@@ -432,7 +432,7 @@ export default function PhilosophyV2() {
           <div className="space-y-6">
             <div className="text-text-secondary text-lg space-y-4">
               <p>
-                The output phase is where we close the loop. Low-risk changes and bug fixes get automatically staged. Regression sweeps run against staging environments to catch issues. And the bugs found? They feed back into intake as new tickets.
+                The summit phase is where we close the loop. Low-risk changes and bug fixes get automatically merged. Regression sweeps run against staging environments to catch issues. And the bugs found? They feed back into explore as new specs.
               </p>
               <p>
                 This is where automation pushes boundaries: not just shipping code, but monitoring what shipped and generating new work from what it finds. The system becomes self-correcting, with human oversight at the approval gates rather than at the keyboard.
@@ -450,7 +450,7 @@ export default function PhilosophyV2() {
           Three contracts, one <strong className="text-accent">system</strong>
         </h2>
         <p className="text-text-secondary text-lg mb-8 max-w-xl mx-auto">
-          That's it. Input to intake is whatever. Output is spec.md. Input to implementation is spec.md. Output is a commit hash. Input to output is a commit hash. Output is whatever comes next. The orchestrator's opinions end at these three contracts. Everything between them — how specs get written, how code gets built, how deploys get monitored — is decided by the layers below. That's what makes the system composable: opinionated about boundaries, unopinionated about internals.
+          That's it. Input to explore is whatever. Output is spec.md. Input to climb is spec.md. Output is a PR. Input to summit is a PR. Output is whatever comes next. Belayer's opinions end at these three contracts. Everything between them — how specs get written, how code gets built, how deploys get monitored — is decided by the nodes below. That's what makes the system composable: opinionated about boundaries, unopinionated about internals.
         </p>
         <div className="max-w-lg mx-auto mb-10">
           <ThreeContracts />
