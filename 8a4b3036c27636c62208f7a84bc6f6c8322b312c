@@ -1,0 +1,25 @@
+src/components/SectionGraphic.tsx
+  925740a16417205f 4,142-280,288-292
+src/pages/Home.tsx
+  925740a16417205f 11-12,14,17,25,30,33,35,38,42,45,50,53,55,58,62,65,70,73,75,78,82,85,90,93,95,98,102,105,110,113,115,118,122,125,133,135,138,141-143
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.5",
+  "base_commit_sha": "8a4b3036c27636c62208f7a84bc6f6c8322b312c",
+  "prompts": {
+    "925740a16417205f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1b17adc1-a40d-4181-9ce9-b5f9efbc61a9",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Donovan Yohan",
+      "messages": [],
+      "total_additions": 228,
+      "total_deletions": 61,
+      "accepted_lines": 228,
+      "overriden_lines": 0
+    }
+  }
+}
