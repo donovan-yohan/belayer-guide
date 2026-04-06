@@ -1,0 +1,25 @@
+src/pages/PhilosophyV3.tsx
+  346711dce37c71eb 10,451-486
+src/components/diagrams/TelemetryLayer.tsx
+  346711dce37c71eb 1-135
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.5",
+  "base_commit_sha": "a368763214b10aae2dd746a442abd82ff3bdb95e",
+  "prompts": {
+    "346711dce37c71eb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "815d0c1b-9d2e-4174-a9f4-9df01e158b5c",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Donovan Yohan",
+      "messages": [],
+      "total_additions": 172,
+      "total_deletions": 2,
+      "accepted_lines": 172,
+      "overriden_lines": 0
+    }
+  }
+}
