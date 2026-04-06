@@ -2,16 +2,23 @@ import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import PhilosophyV1 from './PhilosophyV1'
 import PhilosophyV2 from './PhilosophyV2'
+import PhilosophyV3 from './PhilosophyV3'
 import PhilosophyArchive from '../components/PhilosophyArchive'
 import type { PhilosophyVersion } from '../components/PhilosophyArchive'
 
 const versions: PhilosophyVersion[] = [
   {
+    id: 'v3',
+    title: 'Context Is the Constraint',
+    subtitle: 'Context routing is the hard problem. The harness is where it gets solved.',
+    date: 'April 2026',
+    current: true,
+  },
+  {
     id: 'v2',
     title: 'Three Roles, Three Phases',
     subtitle: 'Top-down: orchestrator, harness, agent. Three phases of orchestration.',
     date: 'March 2026',
-    current: true,
   },
   {
     id: 'v1',
@@ -22,12 +29,13 @@ const versions: PhilosophyVersion[] = [
 ]
 
 const versionContent: Record<string, React.ComponentType> = {
+  v3: PhilosophyV3,
   v2: PhilosophyV2,
   v1: PhilosophyV1,
 }
 
 export default function Philosophy() {
-  const [activeVersion, setActiveVersion] = useState('v2')
+  const [activeVersion, setActiveVersion] = useState('v3')
   const [showFab, setShowFab] = useState(true)
   const [modalOpen, setModalOpen] = useState(false)
 
@@ -74,7 +82,7 @@ export default function Philosophy() {
     return () => { document.body.style.overflow = '' }
   }, [modalOpen])
 
-  const Content = versionContent[activeVersion] ?? PhilosophyV2
+  const Content = versionContent[activeVersion] ?? PhilosophyV3
 
   return (
     <>
@@ -94,7 +102,7 @@ export default function Philosophy() {
                 <span className="text-text-muted ml-2 hidden sm:inline">({currentVersion?.date})</span>
               </p>
               <button
-                onClick={() => handleVersionChange('v2')}
+                onClick={() => handleVersionChange('v3')}
                 className="shrink-0 text-accent text-xs sm:text-sm font-medium hover:text-amber-400 transition-colors ml-4"
               >
                 Back to current →
