@@ -133,7 +133,7 @@ export default function PhilosophyV3() {
           Three layers of <strong className="text-accent">identity</strong>
         </h2>
         <p className="text-text-secondary text-lg mb-8 max-w-xl mx-auto">
-          People conflate three things that have different owners, different lifecycles, and different jobs. The model. The harness. The repo context. Separating them is how you reason about what's responsible for what — and where context should live.
+          Agent identity can be understood in three layers: the model, the harness, and the repo context. Each has different owners, different lifecycles, and different jobs — but there's genuine disagreement in the industry about whether this separation is the right model, or whether these layers should be tightly woven together. Nobody denies that repo context matters for task quality. The debate is over how tightly it should couple with the harness — and whether separating them is a feature or a limitation.
         </p>
         <ThreeLayers />
       </Section>
@@ -350,10 +350,10 @@ export default function PhilosophyV3() {
         content={
           <div className="text-text-secondary text-lg space-y-4">
             <p>
-              The systems that work best right now are tightly coupled. Cursor owns the editor, the model routing, the context window. Devin owns the environment, the browser, the deployment. They solve the context routing problem because they own the whole stack.
+              There are genuine, competing philosophies here — not just product preferences. On one side, projects like OpenCode, LangChain, and much of the open-source community advocate for clean separation between these layers. The harness loads context, the context lives in the repo, and the two remain composable. Memory is a capability the harness provides, not something the harness <em>becomes</em>.
             </p>
             <p>
-              The composable approach — pick your model, pick your harness, pick your orchestrator — is philosophically clean but practically harder. You end up building glue between layers that weren't designed to talk to each other. So which do you pick? Lock in and hope you chose right, or stay loose and accept the integration tax?
+              On the other, Anthropic's Claude Code has built a multi-level memory hierarchy directly into its harness. Letta — born from the MemGPT research project — argues the question itself is wrong: memory isn't a plugin you add to a harness, it <em>is</em> the harness. Their position is that managing context is the harness's core job, and treating it as a separable concern produces shallow systems. Randomlabs' Slate takes a similar stance — its Thread Weaving architecture treats memory management and orchestration as the same problem, inseparable by design.
             </p>
           </div>
         }
@@ -375,10 +375,13 @@ export default function PhilosophyV3() {
         content={
           <div className="text-text-secondary text-lg space-y-4">
             <p>
-              Tightly coupled systems ship fast but break when assumptions change. A new model drops that's better at planning but your system is wired to one provider. A better review tool ships but your harness can't swap it in.
+              The integrated camp makes a strong case. The harness <em>does</em> make invisible decisions that external plugins can't control — how instructions load into context, what survives compaction, how memory surfaces to the agent. Claude Code's memory system is a 3-layer bandwidth-aware hierarchy with background consolidation, staleness detection, and aggressive pruning — all built directly into the harness. Letta's Context Constitution codifies similar principles. These aren't superficial integrations. They're deeply engineered, and they work.
             </p>
             <p>
-              Meanwhile, composable systems are flexible but slow to mature. Every integration is custom. Every boundary is a potential failure point. The evidence so far is that neither extreme works. What works is having clear contracts between layers — tight enough that context flows correctly, loose enough that you can swap what's behind them.
+              But one observation is worth sitting with: the parties most heavily advocating for vertically integrated context — where the lines between repo context and agent harness blur — are also the ones with an economic incentive to keep you in their ecosystem. Tight coupling creates switching costs. Switching costs create lock-in. That doesn't make them wrong. But it makes the argument worth examining carefully.
+            </p>
+            <p>
+              It's still unclear which approach wins. Belayer is hedging on composability and modularity over close integration — not because the integrated approach can't produce better results today, but because in a landscape moving this fast, the ability to swap any layer without rewriting the others is a bet we'd rather make than the alternative.
             </p>
           </div>
         }
