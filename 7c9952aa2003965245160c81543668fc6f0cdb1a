@@ -1,0 +1,36 @@
+src/pages/PhilosophyV3.tsx
+  a7fc0d13d8dffdb0 136,353,356,378,381-384
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.5",
+  "base_commit_sha": "7c9952aa2003965245160c81543668fc6f0cdb1a",
+  "prompts": {
+    "925740a16417205f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1b17adc1-a40d-4181-9ce9-b5f9efbc61a9",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Donovan Yohan",
+      "messages": [],
+      "total_additions": 0,
+      "total_deletions": 0,
+      "accepted_lines": 42,
+      "overriden_lines": 0
+    },
+    "a7fc0d13d8dffdb0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b0ddbb45-9a2a-4312-899b-a20d9b61b1b4",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Donovan Yohan",
+      "messages": [],
+      "total_additions": 9,
+      "total_deletions": 6,
+      "accepted_lines": 8,
+      "overriden_lines": 0
+    }
+  }
+}
